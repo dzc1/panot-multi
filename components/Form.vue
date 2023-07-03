@@ -594,46 +594,59 @@
               <li class="text-center">I Declare:</li>
               <li>
                 I. That I take responsibility for the eBike PANOT and the
-                accompanying accessories (basket and mobile holder) from the
-                moment of delivery until its return.
+                accompanying <br />
+                accessories (basket and mobile holder) <br />
+                from the moment of delivery until its return.
               </li>
               <li>
                 II. That I commit to using it with due diligence, in accordance
+                <br />
                 with its intended characteristics and use (urban) and complying
+                <br />
                 with traffic regulations, being obligated to compensate PANOT,
-                the establishment, and/or third parties who provided the eBike
-                to the establishment for any damages that may arise from my
-                failure to comply with such obligations.
+                the establishment, and/or third parties <br />
+                who provided the eBike to the establishment for any damages that
+                <br />
+                may arise from my failure to comply with such obligations.
               </li>
               <li>
                 III. - That I have confirmed the condition of the eBike prior to
+                <br />
                 signing this document and that it is in perfect aesthetic and
-                technical condition, having verified its proper functioning.
+                technical condition, <br />
+                having verified its proper functioning.
               </li>
               <li>
-                IV. That I declare that I am aware that the eBike can only be
-                used by the person designated for that purpose by the
-                establishment.
+                IV. That I declare that I am aware that the eBike <br />
+                can only be used by the person <br />
+                designated for that purpose by the establishment.
               </li>
               <li>
                 V. - That I declare that I am aware that the risk associated
-                with the use of the eBike is not covered by any insurance, and I
-                will be solely responsible for any damages or injuries that I
-                may suffer or cause to third parties during its use, releasing
-                the establishment, PANOT, and third parties who provided the
-                eBike to the establishment from any liability in this regard.
+                with the use of the eBike <br />
+                is not covered by any insurance, and I will be solely
+                responsible <br />
+                for any damages or injuries that I may suffer or cause to third
+                parties <br />
+                during its use, <br />
+                releasing the establishment, PANOT, and third parties who
+                provided the eBike to the establishment <br />
+                from any liability in this regard.
               </li>
               <li>
                 VI. - That I declare that I am aware of the obligation to return
-                the eBike (and accessories) in the same condition in which it
-                was delivered to me, and that damages, loss, or theft of the
-                eBike are not covered by any insurance. I commit to assuming the
-                costs of its repair in case of return in poor condition, and the
-                full price of the bike in case of return in unserviceable
-                conditions or non-return.
+                the eBike (and accessories) <br />
+                in the same condition in which it was delivered to me, and that
+                damages, loss, or theft <br />
+                of the eBike are not covered by any insurance. <br />
+                I commit to assuming the costs of its repair in case of return
+                in poor condition, <br />
+                and the full price of the bike in case of return in
+                unserviceable conditions or non-return.
               </li>
               <li>
                 VII. - That I declare that I am aware that the eBike is equipped
+                <br />
                 with a GPS mobile system, which I authorize so that PANOT can
                 locate it in case of loss or theft.
               </li>
