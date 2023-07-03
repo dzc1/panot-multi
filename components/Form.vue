@@ -5,177 +5,26 @@
     </template>
     <!-- Step 2 -->
     <template v-else-if="formSteps.step === 2">
-      <div class="container px-4 mx-auto">
-        <div class="max-w-2xl mx-auto text-center">
-          <span
-            class="inline-block uppercase py-1 px-3 text-xs font-semibold text-black bg-gray-50 rounded-full mb-8"
-            >location</span
-          >
-        </div>
-        <div class="flex flex-wrap justify-center -mx-4">
-          <div class="w-full md:w-1/2 lg:w-auto px-4 xl:px-10 mb-10 md:mb-0">
-            <div
-              class="max-w-sm mx-auto h-full py-8 px-6 bg-white border border-gray-200 rounded-lg"
-            >
-              <div class="max-w-2xs mx-auto text-center">
-                <h5 class="text-2xl font-montserrat text-gray-900 mb-3">
-                  Sotogrande, Spain
-                </h5>
-                <p class="text-black font-monserrat mb-4">
-                  Explore Sotogrande's hidden gems and iconic landmarks with
-                  Panot on two wheels, creating memories that will last a
-                  lifetime.
-                </p>
-                <button
-                  @click="selectCity('Sotogrande')"
-                  class="bg-black text-white w-4/6 rounded-lg p-3"
-                >
-                  Sotogrande
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="w-full md:w-1/2 lg:w-auto px-4 xl:px-10">
-            <div
-              class="max-w-sm mx-auto h-full py-8 px-6 bg-white border border-gray-200 rounded-lg"
-            >
-              <div class="max-w-2xs mx-auto text-center">
-                <h5 class="text-2xl font-montserrat text-gray-900 mb-3">
-                  Fuerteventura, Spain
-                </h5>
-                <p class="text-black font-monserrat mb-4">
-                  Immerse yourself in Fuerteventura's unique culture and natural
-                  wonders with Panot as you pedal through stunning nature
-                  reserves.
-                </p>
-                <button
-                  @click="selectCity('Fuerteventura')"
-                  class="bg-black text-white w-4/6 rounded-lg p-3"
-                >
-                  Fuerteventura
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="w-full flex justify-center pt-6">
-          <button
-            @click="emitCloseUp"
-            class="border text-black rounded-md px-4 py-2 hover:bg-black hover:text-white"
-          >
-            Close
-          </button>
-        </div>
-      </div>
+      <Location @emitChildCity="selectCity" @emitChildClose="emitCloseUp" />
     </template>
     <!-- Step 3 -->
     <template v-else-if="formSteps.step === 3">
-      <div class="container px-4 mx-auto">
-        <div class="max-w-2xl mx-auto text-center">
-          <span
-            class="inline-block uppercase py-1 px-3 text-xs font-semibold text-black bg-gray-50 rounded-full mb-4 md:mb-8"
-            >choose days</span
-          >
-        </div>
-        <div class="flex flex-wrap justify-center">
-          <div
-            v-for="bike in getCurrentBikeOptions()"
-            :key="bike.id"
-            class="w-full md:w-1/4 px-2 xl:px-10 md:mb-10 mb-4"
-          >
-            <div
-              class="max-w-full mx-auto h-full py-4 md:py-8 bg-white border border-gray-200 rounded-lg"
-            >
-              <div class="mx-auto text-center">
-                <h5 class="text-2xl font-montserrat text-gray-900 mb-3">
-                  {{ bike.timeFrame }}
-                </h5>
-                <p class="text-black md:p-4 font-monserrat mb-4 md:mb-8">
-                  {{ bike.name }}
-                </p>
-                <button
-                  @click="selectBike(bike)"
-                  class="bg-black text-white w-4/6 rounded-lg p-2 md:p-3"
-                >
-                  {{ bike.timeFrame }}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="flex justify-between px-6">
-        <div>
-          <button
-            class="border text-black rounded-md px-4 py-2 hover:bg-black hover:text-white"
-            @click="prevStep"
-          >
-            Previous
-          </button>
-          <button
-            class="ml-4 border text-black rounded-md px-4 py-2 hover:bg-black hover:text-white"
-            @click="emitCloseUp"
-          >
-            Close
-          </button>
-        </div>
-
-        <button
-          class="bg-black text-white rounded-md px-4 py-2 hover:border hover:text-black hover:bg-transparent"
-          @click="nextStep"
-        >
-          Next
-        </button>
-      </div>
+      <Days
+        :formSteps="formSteps"
+        @currentBikeEmit="selectBike"
+        @prevStep="prevStep"
+        @closeUp="emitCloseUp"
+        @nextStep="nextStep"
+      />
     </template>
     <!-- Step 4 -->
     <template v-else-if="formSteps.step === 4">
-      <div class="container px-4 mx-auto">
-        <div class="max-w-2xl mx-auto text-center">
-          <span
-            class="inline-block uppercase py-1 px-3 text-xs font-semibold text-black bg-gray-50 rounded-full mb-8"
-            >name</span
-          >
-        </div>
-
-        <div class="mb-6">
-          <label
-            class="block mb-1.5 text-sm text-gray-900 font-semibold"
-            for="name"
-            >FullName</label
-          >
-          <input
-            class="w-full py-3 px-4 text-sm text-gray-900 placeholder-gray-400 border border-gray-200 focus:border-black focus:outline-black rounded-lg"
-            v-model="formSteps.fullName"
-            type="text"
-            placeholder="I.E Michael Scott"
-            id="name"
-          />
-          <div class="flex justify-between mt-8">
-            <div>
-              <button
-                class="border text-black rounded-md px-4 py-2 hover:bg-black hover:text-white"
-                @click="prevStep"
-              >
-                Previous
-              </button>
-              <button
-                class="ml-4 border text-black rounded-md px-4 py-2 hover:bg-black hover:text-white"
-                @click="emitCloseUp"
-              >
-                Close
-              </button>
-            </div>
-
-            <button
-              class="bg-black text-white rounded-md px-4 py-2 hover:border hover:text-black hover:bg-transparent"
-              @click="nextStep"
-            >
-              Next
-            </button>
-          </div>
-        </div>
-      </div>
+      <Name
+        v-model:fullName="formSteps.fullName"
+        @prevStep="prevStep"
+        @closeUp="emitCloseUp"
+        @nextStep="nextStep"
+      />
     </template>
     <!-- Step 5 -->
     <template v-else-if="formSteps.step === 5">
@@ -664,6 +513,9 @@ import { exportToPDF } from "#imports";
 import Vue3Signature from "vue3-signature";
 import { XCircleIcon } from "@heroicons/vue/24/solid";
 import { ref, reactive } from "vue";
+import Location from "../components/Form/Location.vue";
+import Days from "../components/Form/Days.vue";
+import Name from "../components/Form/Name.vue";
 
 let signatureDisplay = ref(false);
 
@@ -725,9 +577,9 @@ const selectBike = (bike) => {
   nextStep();
 };
 
-const getCurrentBikeOptions = () => {
-  return formSteps.bikeOptions[formSteps.selectedCity];
-};
+// const getCurrentBikeOptions = () => {
+//   return formSteps.bikeOptions[formSteps.selectedCity];
+// };
 let date = ref(new Date().toISOString().slice(0, 10));
 
 const submitForm = () => {

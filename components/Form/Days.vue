@@ -1,0 +1,89 @@
+<template>
+  <div class="text-center">
+    <span
+      class="inline-block uppercase py-1 px-3 text-xs font-semibold text-black bg-gray-50 rounded-full mb-4 md:mb-8"
+      >choose days</span
+    >
+  </div>
+  <div class="flex flex-wrap justify-center">
+    <div
+      v-for="bike in getCurrentBikeOptions()"
+      :key="bike.id"
+      class="w-full md:w-1/4 md:px-4 xl:px-10 md:mb-10 mb-4"
+    >
+      <div
+        class="max-w-full mx-auto h-full py-4 md:py-8 bg-white border border-gray-200 rounded-lg"
+      >
+        <div class="mx-auto text-center">
+          <h5 class="text-2xl font-montserrat text-gray-900 mb-3">
+            {{ bike.timeFrame }}
+          </h5>
+          <p class="md:h-16 text-black md:p-4 font-monserrat mb-4 md:mb-8">
+            {{ bike.name }}
+          </p>
+          <button
+            @click="selectBike(bike)"
+            class="bg-black text-white w-4/6 rounded-lg p-2 md:p-3"
+          >
+            {{ bike.timeFrame }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex justify-between">
+    <div>
+      <button
+        class="border text-black rounded-md px-4 py-2 hover:bg-black hover:text-white"
+        @click="prevStep"
+      >
+        Previous
+      </button>
+      <button
+        class="ml-4 border text-black rounded-md px-4 py-2 hover:bg-black hover:text-white"
+        @click="emitCloseUp"
+      >
+        Close
+      </button>
+    </div>
+
+    <button
+      class="bg-black text-white rounded-md px-4 py-2 hover:border hover:text-black hover:bg-transparent"
+      @click="nextStep"
+    >
+      Next
+    </button>
+  </div>
+</template>
+
+<script setup>
+// Props
+let props = defineProps({
+  formSteps: {
+    type: Object,
+    required: true,
+  },
+});
+
+let emits = defineEmits(["currentBikeEmit", "prevStep", "closeUp", "nextStep"]);
+
+const selectBike = (bike) => {
+  emits("currentBikeEmit", bike);
+};
+const getCurrentBikeOptions = () => {
+  return props.formSteps.bikeOptions[props.formSteps.selectedCity];
+};
+const prevStep = () => {
+  emits("prevStep");
+};
+
+const emitCloseUp = () => {
+  emits("closeUp");
+};
+
+const nextStep = () => {
+  emits("nextStep");
+};
+</script>
+
+<style scoped></style>
