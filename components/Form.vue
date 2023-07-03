@@ -521,10 +521,17 @@
               locate it in case of loss or theft.
             </p>
           </div>
+          <button
+            @click="signatureDisplay = !signatureDisplay"
+            class="bg-black text-white rounded-md px-4 py-2 hover:border hover:text-black hover:bg-transparent mb-8"
+          >
+            SIGN
+          </button>
         </div>
         <div>
           <!-- <p>Signature</p> -->
           <vue3-signature
+            v-if="signatureDisplay"
             class="border"
             ref="signature"
             :width="300"
@@ -532,12 +539,11 @@
             :penColor="penColor"
           ></vue3-signature>
           <button @click="clearSignature">Clear</button>
-          <button @click="save('image/jpeg')">Save</button>
+          <button @click="submitForm">Submit Form</button>
         </div>
-        <button @click="prevStep">Previous</button>
-        <button @click="submitForm">Submit Form</button>
+        <!-- Hidden PDF Elements -->
         <div>
-          <div ref="pdfSection" class="p-4">
+          <div id="pdfSection" class="p-4">
             <p>Rental Copy</p>
             <ul>
               <li class="font-bold">
@@ -584,7 +590,7 @@
                 </span>
               </li>
             </ul>
-            <ul class="text-sm">
+            <ul>
               <li class="text-center">I Declare:</li>
               <li>
                 I. That I take responsibility for the eBike PANOT and the
@@ -634,9 +640,6 @@
               <li>{{ formSteps.selectedCity }}, on the date of {{ date }}</li>
             </ul>
           </div>
-          <button @click="exportToPDF('my-pdf-file.pdf', pdfSection)">
-            print card
-          </button>
         </div>
       </div>
     </template>
@@ -648,6 +651,8 @@ import { exportToPDF } from "#imports";
 import Vue3Signature from "vue3-signature";
 import { XCircleIcon } from "@heroicons/vue/24/solid";
 import { ref, reactive } from "vue";
+
+let signatureDisplay = ref(false);
 
 let formSteps = reactive({
   step: 2,
@@ -718,25 +723,31 @@ const submitForm = () => {
   let documentOptions = {
     orientation: "p",
     floatPrecision: "smart",
+    unit: "px",
+    format: "a4",
+    compress: true,
   };
   function removeWhiteSpace(str) {
     return str.replace(/\s/g, "-");
   }
+  const pdfSectionElement = document.querySelector("#pdfSection");
   exportToPDF(
     `${removeWhiteSpace(fullName)}${date.value}-rental-form.pdf`,
-    pdfSection.value,
+    pdfSectionElement,
     documentOptions
   );
 };
 
+//PDF LOGIC
 const penColor = ref("#000000");
 const signature = ref(null);
 const clearSignature = () => {
   signature.value.clear();
 };
-const save = (t) => {
-  console.log(signature.value.save(t));
-};
+
+// const save = (t) => {
+//   console.log(signature.value.save(t));
+// };
 
 const emits = defineEmits("closeFunction");
 

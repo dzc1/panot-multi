@@ -25,7 +25,7 @@
     </div>
     <!-- Overlay Section -->
 
-    <div v-if="showOverlay" class="overlay">
+    <div v-if="showOverlay" class="overlay" @click="overlayFunc">
       <div class="container mx-auto p-4">
         <div
           :class="['overlay-content', { 'animate-slide-in': animateOverlay }]"
