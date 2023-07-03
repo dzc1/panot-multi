@@ -15,10 +15,10 @@
         class="max-w-full mx-auto h-full py-4 md:py-8 bg-white border border-gray-200 rounded-lg"
       >
         <div class="mx-auto text-center">
-          <h5 class="text-2xl font-montserrat text-gray-900 mb-3">
+          <h5 class="text-2xl font-montserrat text-gray-900">
             {{ bike.timeFrame }}
           </h5>
-          <p class="md:h-16 text-black md:p-4 font-monserrat mb-4 md:mb-8">
+          <p class="md:h-16 text-black md:p-4 font-monserrat mb-2 md:mb-8">
             {{ bike.name }}
           </p>
           <button

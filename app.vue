@@ -71,11 +71,11 @@ section {
   @apply bg-white text-black hover:bg-transparent hover:border  hover:text-white p-6 py-4 rounded-lg;
 }
 .overlay {
-  @apply fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50;
+  @apply fixed inset-0 flex items-start justify-center bg-black bg-opacity-75 z-20 overflow-y-auto;
 }
 
 .overlay-content {
-  @apply bg-white p-6 rounded-lg;
+  @apply bg-white rounded-lg p-4 md:mt-0 h-[80%];
 }
 @keyframes slide-in {
   0% {
