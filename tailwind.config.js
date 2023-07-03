@@ -1,4 +1,8 @@
 /** @type {import('tailwindcss').Config} */
+const {
+  iconsPlugin,
+  getIconCollections,
+} = require("@egoist/tailwindcss-icons");
 
 import defaultTheme from "tailwindcss/defaultTheme";
 
@@ -14,5 +18,10 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    iconsPlugin({
+      // Select the icon collections you want to use
+      collections: getIconCollections(["mdi"]),
+    }),
+  ],
 };

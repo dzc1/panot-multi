@@ -30,10 +30,7 @@
         <div
           :class="['overlay-content', { 'animate-slide-in': animateOverlay }]"
         >
-          <!-- <button class="bg-black p-4 text-white" @click="overlayFunc">
-            close
-          </button> -->
-          <Form />
+          <Form @closeFunction="overlayFunc" />
         </div>
       </div>
     </div>
@@ -41,6 +38,7 @@
 </template>
 
 <script setup>
+import { exportToPDF } from "#imports";
 const showOverlay = ref(false);
 const animateOverlay = ref(false);
 const overlayFunc = () => {
