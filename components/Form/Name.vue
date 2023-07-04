@@ -7,7 +7,7 @@
   </div>
 
   <div class="mb-6">
-    <div>
+    <div class="max-w-full">
       <label class="block mb-1.5 text-sm text-gray-900 font-semibold" for="name"
         >Full Name</label
       >
@@ -46,8 +46,6 @@
 </template>
 
 <script setup>
-// Props
-
 let emits = defineEmits(["prevStep", "closeUp", "nextStep", "update:fullName"]);
 const formSteps = reactive({
   fullName: "",

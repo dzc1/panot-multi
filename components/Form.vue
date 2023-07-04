@@ -28,496 +28,58 @@
     </template>
     <!-- Step 5 -->
     <template v-else-if="formSteps.step === 5">
-      <div class="relative container px-4 mx-auto">
-        <div class="max-w-2xl mx-auto text-center">
-          <span
-            class="inline-block uppercase py-1 px-3 text-xs font-semibold text-black bg-gray-50 rounded-full mb-8"
-            >Address</span
-          >
-        </div>
-
-        <div class="mb-4">
-          <label
-            class="block mb-1.5 text-sm text-gray-900 font-semibold"
-            for="address"
-            >Address</label
-          >
-          <input
-            class="w-full py-3 px-4 text-sm text-gray-900 placeholder-gray-400 border border-gray-200 focus:border-black focus:outline-black rounded-lg"
-            v-model="formSteps.address.address"
-            type="text"
-            placeholder="123 Sagrada Familia Rd"
-            id="address"
-          />
-        </div>
-        <div class="mb-4">
-          <label
-            class="block mb-1.5 text-sm text-gray-900 font-semibold"
-            for="city"
-            >City</label
-          >
-          <input
-            class="w-full py-3 px-4 text-sm text-gray-900 placeholder-gray-400 border border-gray-200 focus:border-black focus:outline-black rounded-lg"
-            v-model="formSteps.address.city"
-            type="text"
-            placeholder="Barcelona"
-            id="city"
-          />
-        </div>
-        <div class="mb-4">
-          <label
-            class="block mb-1.5 text-sm text-gray-900 font-semibold"
-            for="state"
-            >State</label
-          >
-          <input
-            class="w-full py-3 px-4 text-sm text-gray-900 placeholder-gray-400 border border-gray-200 focus:border-black focus:outline-black rounded-lg"
-            v-model="formSteps.address.state"
-            type="text"
-            placeholder="Catalonia"
-            id="state"
-          />
-        </div>
-        <div class="mb-4">
-          <label
-            class="block mb-1.5 text-sm text-gray-900 font-semibold"
-            for="country"
-            >Country</label
-          >
-          <input
-            class="w-full py-3 px-4 text-sm text-gray-900 placeholder-gray-400 border border-gray-200 focus:border-black focus:outline-black rounded-lg"
-            v-model="formSteps.address.country"
-            type="text"
-            placeholder="Spain"
-            id="country"
-          />
-        </div>
-        <div class="mb-4">
-          <label
-            class="block mb-1.5 text-sm text-gray-900 font-semibold"
-            for="zip"
-            >Postal Code</label
-          >
-          <input
-            class="w-full py-3 px-4 text-sm text-gray-900 placeholder-gray-400 border border-gray-200 focus:border-black focus:outline-black rounded-lg"
-            v-model="formSteps.address.postalCode"
-            type="text"
-            placeholder="08011"
-            id="zip"
-          />
-        </div>
-        <div class="flex justify-between mt-8">
-          <div>
-            <button
-              class="border text-black rounded-md px-4 py-2 hover:bg-black hover:text-white"
-              @click="prevStep"
-            >
-              Previous
-            </button>
-            <button
-              class="ml-4 border text-black rounded-md px-4 py-2 hover:bg-black hover:text-white"
-              @click="emitCloseUp"
-            >
-              Close
-            </button>
-          </div>
-
-          <button
-            class="bg-black text-white rounded-md px-4 py-2 hover:border hover:text-black hover:bg-transparent"
-            @click="nextStep"
-          >
-            Next
-          </button>
-        </div>
-      </div>
+      <Address
+        v-model:address="formSteps.address"
+        @prevStep="prevStep"
+        @closeUp="emitCloseUp"
+        @nextStep="nextStep"
+      />
     </template>
     <!-- Step 6 -->
     <template v-else-if="formSteps.step === 6">
-      <div class="relative container px-4 mx-auto">
-        <div class="max-w-2xl mx-auto text-center">
-          <span
-            class="inline-block uppercase py-1 px-3 text-xs font-semibold text-black bg-gray-50 rounded-full mb-8"
-            >passport or id number</span
-          >
-        </div>
-
-        <div class="mb-6">
-          <label
-            class="block mb-1.5 text-sm text-gray-900 font-semibold"
-            for="passport"
-            >Passport or ID number</label
-          >
-          <input
-            class="w-full py-3 px-4 text-sm text-gray-900 placeholder-gray-400 border border-gray-200 focus:border-black focus:outline-black rounded-lg"
-            v-model="formSteps.passportNumber"
-            type="text"
-            placeholder="1234567890"
-            id="passport"
-          />
-        </div>
-        <div class="flex justify-between mt-8">
-          <div>
-            <button
-              class="border text-black rounded-md px-4 py-2 hover:bg-black hover:text-white"
-              @click="prevStep"
-            >
-              Previous
-            </button>
-            <button
-              class="ml-4 border text-black rounded-md px-4 py-2 hover:bg-black hover:text-white"
-              @click="emitCloseUp"
-            >
-              Close
-            </button>
-          </div>
-
-          <button
-            class="bg-black text-white rounded-md px-4 py-2 hover:border hover:text-black hover:bg-transparent"
-            @click="nextStep"
-          >
-            Next
-          </button>
-        </div>
-      </div>
+      <Passport
+        v-model:passportNumber="formSteps.passportNumber"
+        @prevStep="prevStep"
+        @closeUp="emitCloseUp"
+        @nextStep="nextStep"
+      />
     </template>
     <!-- Step 7 -->
     <template v-else-if="formSteps.step === 7">
-      <div class="relative container px-4 mx-auto">
-        <div class="max-w-2xl mx-auto text-center">
-          <span
-            class="inline-block uppercase py-1 px-3 text-xs font-semibold text-black bg-gray-50 rounded-full mb-8"
-            >Phone Number</span
-          >
-        </div>
-
-        <div class="mb-6">
-          <label
-            class="block mb-1.5 text-sm text-gray-900 font-semibold"
-            for="phone"
-            >Phone Number</label
-          >
-          <input
-            class="w-full py-3 px-4 text-sm text-gray-900 placeholder-gray-400 border border-gray-200 focus:border-black focus:outline-black rounded-lg"
-            v-model="formSteps.phoneContact"
-            type="text"
-            placeholder="+34 622 244 532"
-            id="phone"
-          />
-        </div>
-        <div class="flex justify-between mt-8">
-          <div>
-            <button
-              class="border text-black rounded-md px-4 py-2 hover:bg-black hover:text-white"
-              @click="prevStep"
-            >
-              Previous
-            </button>
-            <button
-              class="ml-4 border text-black rounded-md px-4 py-2 hover:bg-black hover:text-white"
-              @click="emitCloseUp"
-            >
-              Close
-            </button>
-          </div>
-
-          <button
-            class="bg-black text-white rounded-md px-4 py-2 hover:border hover:text-black hover:bg-transparent"
-            @click="nextStep"
-          >
-            Next
-          </button>
-        </div>
-      </div>
+      <Phone
+        v-model:phoneContact="formSteps.phoneContact"
+        @prevStep="prevStep"
+        @closeUp="emitCloseUp"
+        @nextStep="nextStep"
+      />
     </template>
     <!-- Step 8 -->
     <template v-else-if="formSteps.step === 8">
-      <div class="relative container px-4 mx-auto">
-        <div class="max-w-2xl mx-auto text-center">
-          <span
-            class="inline-block uppercase py-1 px-3 text-xs font-semibold text-black bg-gray-50 rounded-full mb-8"
-            >email</span
-          >
-        </div>
-
-        <div class="mb-6">
-          <label
-            class="block mb-1.5 text-sm text-gray-900 font-semibold"
-            for="email"
-            >Email</label
-          >
-          <input
-            class="w-full py-3 px-4 text-sm text-gray-900 placeholder-gray-400 border border-gray-200 focus:border-black focus:outline-black rounded-lg"
-            v-model="formSteps.email"
-            type="email"
-            placeholder="carlos@panotmobility.com"
-            id="email"
-          />
-        </div>
-        <div class="flex justify-between mt-8">
-          <div>
-            <button
-              class="border text-black rounded-md px-4 py-2 hover:bg-black hover:text-white"
-              @click="prevStep"
-            >
-              Previous
-            </button>
-            <button
-              class="ml-4 border text-black rounded-md px-4 py-2 hover:bg-black hover:text-white"
-              @click="emitCloseUp"
-            >
-              Close
-            </button>
-          </div>
-
-          <button
-            class="bg-black text-white rounded-md px-4 py-2 hover:border hover:text-black hover:bg-transparent"
-            @click="nextStep"
-          >
-            Next
-          </button>
-        </div>
-      </div>
+      <Email
+        v-model:email="formSteps.email"
+        @prevStep="prevStep"
+        @closeUp="emitCloseUp"
+        @nextStep="nextStep"
+      />
     </template>
     <!-- Step 9 -->
     <template v-else-if="formSteps.step === 9">
-      <div class="overflow-y-auto h-screen py-8">
-        <div class="text-center">
-          <span
-            class="inline-block py-1 px-3 mb-4 text-xs font-semibold text-black bg-gray-50 rounded-full"
-            >Summary</span
-          >
-          <h2 class="font-monserrat text-2xl font-semibold text-gray-800">
-            Form Summary
-          </h2>
-          <div class="py-2">
-            <p class="text-sm font-monserrat text-gray-900 mb-2">
-              City:
-              <span class="font-semibold">{{ formSteps.selectedCity }}</span>
-            </p>
-            <p class="text-sm font-monserrat text-gray-900 mb-2">
-              Days:
-              <span class="font-semibold">{{
-                formSteps.selectedBike.name
-              }}</span>
-            </p>
-            <p class="text-sm font-monserrat text-gray-900 mb-2">
-              Name: <span class="font-semibold">{{ formSteps.fullName }}</span>
-            </p>
-            <p class="text-sm font-monserrat text-gray-900 mb-2">
-              Email: <span class="font-semibold">{{ formSteps.email }}</span>
-            </p>
-            <p class="text-sm font-monserrat text-gray-900 mb-2">
-              Passport or ID Number:
-              <span class="font-semibold">{{ formSteps.passportNumber }}</span>
-            </p>
-            <p class="text-sm font-monserrat text-gray-900 mb-2">
-              Phone Number:
-              <span class="font-semibold">{{ formSteps.phoneContact }}</span>
-            </p>
-            <p class="text-sm font-monserrat text-gray-900 mb-2">
-              Address:
-              <span class="font-semibold"
-                >{{ formSteps.address.address }}, {{ formSteps.address.city }},
-                {{ formSteps.address.state }}, {{ formSteps.address.country }},
-                {{ formSteps.address.postalCode }}</span
-              >
-            </p>
-          </div>
-          <div class="text-left">
-            <p class="text-sm font-semibold text-gray-900 mb-5">I Declare:</p>
-            <p class="text-md font-montserrat font-light mb-2">
-              I. That I take responsibility for the eBike PANOT and the
-              accompanying accessories (basket and mobile holder) from the
-              moment of delivery until its return.
-            </p>
-            <p class="text-md font-montserrat font-light mb-2">
-              II. That I commit to using it with due diligence, in accordance
-              with its intended characteristics and use (urban) and complying
-              with traffic regulations, being obligated to compensate PANOT, the
-              establishment, and/or third parties who provided the eBike to the
-              establishment for any damages that may arise from my failure to
-              comply with such obligations.
-            </p>
-            <p class="text-md font-montserrat font-light mb-2">
-              III. - That I have confirmed the condition of the eBike prior to
-              signing this document and that it is in perfect aesthetic and
-              technical condition, having verified its proper functioning.
-            </p>
-            <p class="text-md font-montserrat font-light mb-2">
-              IV. That I declare that I am aware that the eBike can only be used
-              by the person designated for that purpose by the establishment.
-            </p>
-            <p class="text-md font-montserrat font-light mb-2">
-              V. - That I declare that I am aware that the risk associated with
-              the use of the eBike is not covered by any insurance, and I will
-              be solely responsible for any damages or injuries that I may
-              suffer or cause to third parties during its use, releasing the
-              establishment, PANOT, and third parties who provided the eBike to
-              the establishment from any liability in this regard.
-            </p>
-            <p class="text-md font-montserrat font-light mb-2">
-              VI. - That I declare that I am aware of the obligation to return
-              the eBike (and accessories) in the same condition in which it was
-              delivered to me, and that damages, loss, or theft of the eBike are
-              not covered by any insurance. I commit to assuming the costs of
-              its repair in case of return in poor condition, and the full price
-              of the bike in case of return in unserviceable conditions or
-              non-return.
-            </p>
-            <p class="text-md font-montserrat font-light mb-2">
-              VII. - That I declare that I am aware that the eBike is equipped
-              with a GPS mobile system, which I authorize so that PANOT can
-              locate it in case of loss or theft.
-            </p>
-          </div>
-          <button
-            @click="signatureDisplay = !signatureDisplay"
-            class="bg-black text-white rounded-md px-4 py-2 hover:border hover:text-black hover:bg-transparent mb-8"
-          >
-            SIGN
-          </button>
-        </div>
-        <div>
-          <!-- <p>Signature</p> -->
-          <vue3-signature
-            v-if="signatureDisplay"
-            class="border"
-            ref="signature"
-            :width="300"
-            :height="400"
-            :penColor="penColor"
-          ></vue3-signature>
-          <button @click="clearSignature">Clear</button>
-          <button @click="submitForm">Submit Form</button>
-        </div>
-        <!-- Hidden PDF Elements -->
-        <div>
-          <div id="pdfSection" class="p-4">
-            <p>Rental Copy</p>
-            <ul>
-              <li class="font-bold">
-                City:
-                <span class="font-light">{{ formSteps.selectedCity }}</span>
-              </li>
-              <li class="font-bold">
-                Days:
-                <span class="font-light">{{
-                  formSteps.selectedBike.name
-                }}</span>
-              </li>
-              <li class="font-bold">
-                Name:
-                <span class="font-light">
-                  {{ formSteps.fullName }}
-                </span>
-              </li>
-              <li class="font-bold">
-                Email:
-                <span class="font-light">
-                  {{ formSteps.email }}
-                </span>
-              </li>
-              <li class="font-bold">
-                Passport or ID Number:
-                <span class="font-light">
-                  {{ formSteps.passportNumber }}
-                </span>
-              </li>
-              <li class="font-bold">
-                Phone Number:
-                <span class="font-light">
-                  {{ formSteps.phoneContact }}
-                </span>
-              </li>
-              <li class="font-bold">
-                Address:
-                <span class="font-light">
-                  {{ formSteps.address.address }}, {{ formSteps.address.city }},
-                  {{ formSteps.address.state }},
-                  {{ formSteps.address.country }},
-                  {{ formSteps.address.postalCode }}
-                </span>
-              </li>
-            </ul>
-            <ul>
-              <li class="text-center">I Declare:</li>
-              <li>
-                I. That I take responsibility for the eBike PANOT and the
-                accompanying <br />
-                accessories (basket and mobile holder) <br />
-                from the moment of delivery until its return.
-              </li>
-              <li>
-                II. That I commit to using it with due diligence, in accordance
-                <br />
-                with its intended characteristics and use (urban) and complying
-                <br />
-                with traffic regulations, being obligated to compensate PANOT,
-                the establishment, and/or third parties <br />
-                who provided the eBike to the establishment for any damages that
-                <br />
-                may arise from my failure to comply with such obligations.
-              </li>
-              <li>
-                III. - That I have confirmed the condition of the eBike prior to
-                <br />
-                signing this document and that it is in perfect aesthetic and
-                technical condition, <br />
-                having verified its proper functioning.
-              </li>
-              <li>
-                IV. That I declare that I am aware that the eBike <br />
-                can only be used by the person <br />
-                designated for that purpose by the establishment.
-              </li>
-              <li>
-                V. - That I declare that I am aware that the risk associated
-                with the use of the eBike <br />
-                is not covered by any insurance, and I will be solely
-                responsible <br />
-                for any damages or injuries that I may suffer or cause to third
-                parties <br />
-                during its use, <br />
-                releasing the establishment, PANOT, and third parties who
-                provided the eBike to the establishment <br />
-                from any liability in this regard.
-              </li>
-              <li>
-                VI. - That I declare that I am aware of the obligation to return
-                the eBike (and accessories) <br />
-                in the same condition in which it was delivered to me, and that
-                damages, loss, or theft <br />
-                of the eBike are not covered by any insurance. <br />
-                I commit to assuming the costs of its repair in case of return
-                in poor condition, <br />
-                and the full price of the bike in case of return in
-                unserviceable conditions or non-return.
-              </li>
-              <li>
-                VII. - That I declare that I am aware that the eBike is equipped
-                <br />
-                with a GPS mobile system, which I authorize so that PANOT can
-                locate it in case of loss or theft.
-              </li>
-              <li>{{ formSteps.selectedCity }}, on the date of {{ date }}</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+      <Summary :formSteps="formSteps" @signatureCaptured="submitForm" />
     </template>
   </div>
 </template>
 
 <script setup>
-import { exportToPDF } from "#imports";
-import Vue3Signature from "vue3-signature";
-import { XCircleIcon } from "@heroicons/vue/24/solid";
 import { ref, reactive } from "vue";
+import { exportToPDF } from "#imports";
 import Location from "../components/Form/Location.vue";
 import Days from "../components/Form/Days.vue";
 import Name from "../components/Form/Name.vue";
-
-let signatureDisplay = ref(false);
+import Address from "../components/Form/Address.vue";
+import Passport from "../components/Form/Passport.vue";
+import Phone from "../components/Form/Phone.vue";
+import Email from "../components/Form/Email.vue";
+import Summary from "../components/Form/Summary.vue";
 
 let formSteps = reactive({
   step: 2,
@@ -577,42 +139,7 @@ const selectBike = (bike) => {
   nextStep();
 };
 
-// const getCurrentBikeOptions = () => {
-//   return formSteps.bikeOptions[formSteps.selectedCity];
-// };
 let date = ref(new Date().toISOString().slice(0, 10));
-
-const submitForm = () => {
-  const { fullName } = formSteps;
-
-  let documentOptions = {
-    orientation: "p",
-    floatPrecision: "smart",
-    unit: "px",
-    format: "a4",
-    compress: true,
-  };
-  function removeWhiteSpace(str) {
-    return str.replace(/\s/g, "-");
-  }
-  const pdfSectionElement = document.querySelector("#pdfSection");
-  exportToPDF(
-    `${removeWhiteSpace(fullName)}${date.value}-rental-form.pdf`,
-    pdfSectionElement,
-    documentOptions
-  );
-};
-
-//PDF LOGIC
-const penColor = ref("#000000");
-const signature = ref(null);
-const clearSignature = () => {
-  signature.value.clear();
-};
-
-// const save = (t) => {
-//   console.log(signature.value.save(t));
-// };
 
 const emits = defineEmits("closeFunction");
 
@@ -620,7 +147,38 @@ let emitCloseUp = () => {
   emits("closeFunction");
 };
 
-// PDF Logic
-const pdfHide = ref(false);
-let pdfSection = ref(null);
+const submitForm = (signature) => {
+  console.log(signature);
+  let formSignature = (formSteps.signature = signature);
+  const {
+    fullName,
+    selectedCity,
+    selectedBike,
+    address,
+    passportNumber,
+    phoneContact,
+  } = formSteps;
+
+  // Pass the captured signature data to the exportToPDF function
+  const documentOptions = {
+    // Options for PDF generation...
+    signatureData: formSignature,
+    name: fullName,
+    city: selectedCity,
+    bikeOption: selectedBike.name,
+    address: address.address,
+    phone: phoneContact,
+    passport: passportNumber,
+  };
+  // Remove whitespace form name variable
+  let removeWhiteSpace = (str) => str.replace(/\s/g, "-");
+
+  console.log(documentOptions);
+
+  // exportToPDF(
+  //   `${removeWhiteSpace(fullName)}${date.value}-rental-form.pdf`,
+  //   pdfSectionElement,
+  //   documentOptions
+  // );
+};
 </script>

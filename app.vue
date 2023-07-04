@@ -59,7 +59,7 @@ section {
   @apply relative container px-4 mx-auto;
 }
 .content-inner-container {
-  @apply max-w-xs sm:max-w-md lg:max-w-xl;
+  @apply sm:max-w-md lg:max-w-xl text-center md:text-left;
 }
 .content-inner-container h1 {
   @apply text-4xl sm:text-6xl lg:text-8xl  text-black mb-12;
@@ -68,10 +68,10 @@ section {
   @apply max-w-sm lg:max-w-xl mb-12 text-white;
 }
 .content-inner-container button {
-  @apply bg-white text-black hover:bg-transparent hover:border  hover:text-white p-6 py-4 rounded-lg;
+  @apply w-full md:w-1/2 bg-white text-black hover:bg-transparent hover:border  hover:text-white p-6 py-4 rounded-lg;
 }
 .overlay {
-  @apply fixed inset-0 flex items-start justify-center bg-black bg-opacity-75 z-20 overflow-y-auto;
+  @apply fixed inset-0 flex items-start md:items-center justify-center bg-black bg-opacity-75 z-20 overflow-y-auto;
 }
 
 .overlay-content {
@@ -87,7 +87,20 @@ section {
     transform: translateY(0);
   }
 }
+@keyframes slide-out {
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
 .animate-slide-in {
   animation: slide-in 0.5s ease-in-out;
+}
+.animate-slide-out {
+  animation: slide-out 0.5s ease-in-out;
 }
 </style>
