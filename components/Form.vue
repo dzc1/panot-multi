@@ -182,8 +182,8 @@ const submitForm = (signature) => {
 
   II. That I commit to using it with due diligence, in accordance with its intended characteristics 
   and use (urban) and complying with traffic regulations, being obligated to compensate PANOT, 
-  the establishment, and/or third parties who provided the eBike to the establishment for any damages 
-  that may arise from my failure to comply with such obligations.
+  the establishment, and/or third parties who provided the eBike to the establishment for any 
+  damages that may arise from my failure to comply with such obligations.
 
   III. - That I have confirmed the condition of the eBike prior to signing 
   this document and that it is in perfect aesthetic and technical condition, having verified 
@@ -223,13 +223,6 @@ const submitForm = (signature) => {
     20,
     250
   );
-
-  // doc.text("City: " + formStepsData.selectedCity, 20, 30);
-  // doc.text("Bike Option: " + formStepsData.selectedBike.name, 20, 40);
-  // doc.text("Address: " + formStepsData.address.address, 20, 50);
-  // doc.text("Phone: " + formStepsData.phoneContact, 20, 60);
-  // doc.text("Passport: " + formStepsData.passportNumber, 20, 70);
-  // doc.text("Signature: " + formSignature, 20, 80);
 
   // Save the PDF document
   doc.save(
