@@ -121,10 +121,16 @@
             Clear
           </button>
           <button
-            class="bg-black text-white rounded-md px-4 py-2 hover:border hover:text-black hover:bg-transparent mb-8"
+            class="bg-black text-white rounded-md px-4 py-2 hover:border hover:text-black hover:bg-transparent mb-4"
             @click="emitSignature"
           >
-            Submit Form
+            Download Confirmation Form
+          </button>
+          <button
+            class="bg-black text-white rounded-md px-4 py-2 hover:border hover:text-black hover:bg-transparent mb-8"
+            @click="pay"
+          >
+            Pay
           </button>
         </div>
       </div>
@@ -136,7 +142,7 @@
 import Vue3Signature from "vue3-signature";
 import { ref, reactive } from "vue";
 
-let emits = defineEmits(["signatureCaptured"]);
+let emits = defineEmits(["signatureCaptured", "payButton"]);
 
 defineProps({
   formSteps: {
@@ -157,6 +163,10 @@ const clearSignature = () => {
 const emitSignature = () => {
   const signatureData = signature.value.save("signatue/png");
   emits("signatureCaptured", signatureData);
+};
+
+const pay = () => {
+  emits("payButton");
 };
 
 // Display Signature Box
