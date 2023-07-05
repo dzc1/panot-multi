@@ -110,8 +110,8 @@
         <vue3-signature
           class="border"
           ref="signature"
-          :width="300"
-          :height="1000"
+          :w="'100%'"
+          :h="'250px'"
           :penColor="penColor"
         ></vue3-signature>
         <div class="flex flex-col py-8">
@@ -122,14 +122,20 @@
             Clear
           </button>
           <button
-            class="bg-black text-white rounded-md px-4 py-2 hover:border hover:text-black hover:bg-transparent mb-4"
+            class="rounded-md px-4 py-2 mb-4"
             @click="emitSignature"
+            :class="
+              buttonHide
+                ? 'bg-gray-200 text-gray-300'
+                : 'bg-black text-white  hover:bg-transparent hover:text-black cursor-pointer '
+            "
           >
             Download Confirmation Form
           </button>
           <button
-            class="bg-black text-white rounded-md px-4 py-2 hover:border hover:text-black hover:bg-transparent mb-8"
+            class="bg-black text-white rounded-md px-4 py-2 hover:text-black hover:bg-transparent mb-8"
             @click="pay"
+            :disabled="buttonHide"
           >
             Pay
           </button>
@@ -155,7 +161,22 @@ defineProps({
 //PDF LOGIC
 const penColor = ref("#000000");
 
+// Display Signature Box
+let signatureDisplay = ref(false);
+
 const signature = ref(null);
+// let test = ref(false);
+
+// Watch the signature variable for changes
+// watch(signature, (newValue) => {
+//   if (newValue) {
+//     // Signature display has changed, do something...
+//     // For example, enable buttons or perform any necessary logic.
+//     // You can access the signature component using `signature.value`.
+//     alert("hello");
+//   }
+// });
+
 // Clear Signature Prop Values
 const clearSignature = () => {
   signature.value.clear();
@@ -169,13 +190,6 @@ const emitSignature = () => {
 const pay = () => {
   emits("payButton");
 };
-
-// Display Signature Box
-let signatureDisplay = ref(false);
-
-// PDF Logic
-const pdfHide = ref(false);
-let pdfSection = ref(null);
 </script>
 
 <style scoped></style>
