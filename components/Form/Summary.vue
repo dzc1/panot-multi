@@ -97,6 +97,7 @@
         </p>
       </div>
       <button
+        v-show="!signatureDisplay"
         @click="signatureDisplay = !signatureDisplay"
         class="w-full bg-black text-white rounded-md px-4 py-2 hover:border hover:text-black hover:bg-transparent my-4"
       >
