@@ -1,6 +1,6 @@
 <template>
   <section>
-    <img class="bg-img" src="./assets/imgs/bg-2.jpg" alt="" />
+    <img class="bg-img" src="./assets/imgs/background.png" alt="" />
     <div class="content-outer-container">
       <div class="content-inner-container">
         <h1 class="font-montserrat">

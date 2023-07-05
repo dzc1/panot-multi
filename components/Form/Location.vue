@@ -1,9 +1,14 @@
 <template>
-  <div class="mx-auto text-center">
-    <span
-      class="inline-block uppercase py-1 px-3 text-xs font-semibold text-black bg-gray-50 rounded-full mb-4 md:mb-8"
-      >location</span
-    >
+  <div class="flex justify-between mb-4 md:mb-8 items-center">
+    <div class="flex justify-center w-full">
+      <span
+        class="inline-block uppercase py-1 px-3 text-xs font-semibold text-black bg-gray-50 rounded-full"
+        >location</span
+      >
+    </div>
+    <span @click="emitCloseUp">
+      <XCircleIcon class="h-8 w-8 text-black"
+    /></span>
   </div>
   <div class="flex flex-wrap justify-center -mx-4">
     <div class="w-full md:w-1/2 lg:w-auto px-4 xl:px-10 mb-4 md:mb-8">
@@ -49,17 +54,10 @@
       </div>
     </div>
   </div>
-  <div class="w-full flex justify-center">
-    <button
-      @click="emitCloseUp"
-      class="w-full md:w-1/2 border text-black rounded-md px-4 py-2 hover:bg-black hover:text-white"
-    >
-      Close
-    </button>
-  </div>
 </template>
 
 <script setup>
+import { XCircleIcon } from "@heroicons/vue/24/solid";
 let emits = defineEmits(["emitChildCity", "emitChildClose"]);
 
 const selectCity = (city) => {

@@ -65,6 +65,7 @@
     <!-- Step 9 -->
     <template v-else-if="formSteps.step === 9">
       <Summary :formSteps="formSteps" @signatureCaptured="submitForm" />
+      <button @click="handleStripePayment">PAY</button>
     </template>
   </div>
 
@@ -74,6 +75,8 @@
 </template>
 
 <script setup>
+import { loadStripe } from "@stripe/stripe-js";
+import { useRuntimeConfig } from "nuxt/app";
 import { ref, reactive } from "vue";
 import { exportToPDF } from "#imports";
 import { jsPDF } from "jspdf";
@@ -151,7 +154,45 @@ let emitCloseUp = () => {
 };
 
 let date = ref(new Date().toISOString().slice(0, 10));
-const submitForm = (signature) => {
+
+// Helper function to handle the Stripe payment
+const handleStripePayment = async () => {
+  const config = useRuntimeConfig();
+  const stripe = await loadStripe(config.public.stripePk);
+
+  // Stripe payment code
+  const lineItems = [];
+  const selectedBikeOption = formSteps.selectedBike;
+
+  if (selectedBikeOption) {
+    const cityOptions = formSteps.bikeOptions[formSteps.selectedCity];
+    const selectedOption = cityOptions.find(
+      (option) => option.id === selectedBikeOption
+    );
+
+    if (selectedOption) {
+      lineItems.push({
+        price: `price_${selectedOption.id}`,
+        quantity: 1,
+      });
+    }
+  }
+
+  const { error } = await stripe.redirectToCheckout({
+    lineItems: lineItems,
+    mode: "payment",
+    successUrl: `${config.public.appUrl}/success`,
+    cancelUrl: `${config.public.appUrl}`,
+  });
+
+  if (error) {
+    console.error("Stripe payment error:", error);
+  }
+};
+
+const submitForm = async (signature) => {
+  const config = useRuntimeConfig();
+  const stripe = await loadStripe(config.public.stripePk);
   const formStepsData = { ...formSteps };
   let formSignature = (formSteps.signature = signature);
 
@@ -230,5 +271,39 @@ const submitForm = (signature) => {
       date.value
     }.pdf`
   );
+
+  // Stripe payment code
+  const lineItems = [];
+  const selectedBikeOption = formSteps.selectedBike;
+
+  if (selectedBikeOption) {
+    // Find the selected city in the bikeOptions object
+    const cityOptions = formSteps.bikeOptions[formSteps.selectedCity];
+
+    // Find the selected bike option within the city options
+    const selectedOption = cityOptions.find(
+      (option) => option.id === selectedBikeOption
+    );
+
+    if (selectedOption) {
+      // Add the selected bike option to the lineItems array
+      lineItems.push({
+        price: `price_${selectedOption.id}`,
+        quantity: 1,
+      });
+    }
+  }
+
+  const { error } = await stripe.redirectToCheckout({
+    lineItems: lineItems,
+    mode: "payment",
+    successUrl: `${config.public.appUrl}/success`,
+    cancelUrl: `${config.public.appUrl}`,
+  });
+
+  if (error) {
+    // Handle error
+    console.error("Stripe payment error:", error);
+  }
 };
 </script>

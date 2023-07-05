@@ -19,6 +19,7 @@
   "dependencies": {
     "@egoist/tailwindcss-icons": "^1.1.0",
     "@heroicons/vue": "^2.0.18",
+    "@stripe/stripe-js": "^1.54.1",
     "jspdf": "^2.5.1",
     "vue3-signature": "^0.2.2"
   }
