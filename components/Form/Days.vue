@@ -14,7 +14,7 @@
     <div
       v-for="bike in getCurrentBikeOptions()"
       :key="bike.id"
-      class="w-full md:w-1/4 md:px-4 xl:px-10 md:mb-10 mb-4"
+      class="w-full md:w-1/2 md:px-4 xl:px-10 md:mb-10 mb-4"
     >
       <div
         class="max-w-full mx-auto h-full py-4 md:py-8 bg-white border border-gray-200 rounded-lg"

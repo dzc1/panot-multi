@@ -11,7 +11,7 @@
     /></span>
   </div>
 
-  <div class="mb-6">
+  <div class="mb-6 w-[40vh]">
     <label class="block mb-1.5 text-sm text-gray-900 font-semibold" for="email"
       >Email</label
     >

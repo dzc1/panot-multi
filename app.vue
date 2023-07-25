@@ -3,30 +3,33 @@
     <img class="bg-img" src="./assets/imgs/background.png" alt="" />
     <div class="content-outer-container">
       <div class="content-inner-container">
+        <form>
+          <label
+            class="block mb-2 text-xl font-light text-white"
+            for="locale-select"
+            >{{ $t("language") }}:
+          </label>
+          <select id="locale-select" v-model="$i18n.locale">
+            <option value="en">en</option>
+            <option value="es">en</option>
+          </select>
+        </form>
         <h1 class="font-montserrat">
-          Rent a Bike with
+          {{ $t("h1-home") }}
           <span
-            ><img
-              class="inline"
-              src="./assets/imgs/panot-black-logo.webp"
-              alt=""
-            />
+            ><img class="inline" src="./assets/imgs/panot-white.webp" alt="" />
           </span>
         </h1>
         <p class="font-monserrat">
-          Explore your surroundings with ease by renting a bike from Panot, the
-          premier bike rental service exclusively for hotels. Whether you're
-          looking to explore the local attractions, enjoy a leisurely ride along
-          the beach, or simply commute to nearby destinations, our high-quality
-          bikes are here to make your stay more memorable.
+          {{ $t("p-home") }}
         </p>
-        <button @click="overlayFunc">Get Started</button>
+        <button @click="overlayFunc">{{ $t("cta-home-get-started") }}</button>
       </div>
     </div>
     <!-- Overlay Section -->
 
     <div v-if="showOverlay" class="overlay">
-      <div class="p-4">
+      <div class="p-2 md:p-4 flex items-center">
         <div
           :class="['overlay-content', { 'animate-slide-in': animateOverlay }]"
         >
@@ -59,23 +62,23 @@ section {
   @apply relative container px-4 mx-auto;
 }
 .content-inner-container {
-  @apply sm:max-w-md lg:max-w-xl text-center md:text-left;
+  @apply text-center md:text-center;
 }
 .content-inner-container h1 {
-  @apply text-4xl sm:text-6xl lg:text-8xl  text-black mb-12;
+  @apply text-4xl sm:text-6xl  text-gray-100 mb-12;
 }
 .content-inner-container p {
-  @apply max-w-sm lg:max-w-xl mb-12 text-white;
+  @apply mb-12 text-white text-xl;
 }
 .content-inner-container button {
   @apply w-full md:w-1/2 bg-white text-black hover:bg-transparent hover:border  hover:text-white p-6 py-4 rounded-lg;
 }
 .overlay {
-  @apply fixed inset-0 flex items-start md:items-center justify-center bg-black bg-opacity-75 z-20 overflow-y-auto;
+  @apply fixed inset-0 flex items-center md:items-center justify-center bg-black bg-opacity-75 z-20 overflow-y-auto h-full;
 }
 
 .overlay-content {
-  @apply bg-white rounded-lg p-4 md:mt-0 h-[80%];
+  @apply bg-white rounded-lg p-4;
 }
 @keyframes slide-in {
   0% {

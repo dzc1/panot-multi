@@ -150,7 +150,7 @@ let formSteps = reactive({
       },
     ],
   },
-  fullName: "Diego",
+  fullName: "",
   address: {
     address: "",
     city: "",
@@ -158,10 +158,10 @@ let formSteps = reactive({
     country: "",
     postalCode: "",
   },
-  passportNumber: "19191919",
-  email: "diego@diego.com",
+  passportNumber: "",
+  email: "",
   signature: null,
-  phoneContact: "+34666666666",
+  phoneContact: "",
 });
 
 const testPayment = () => {

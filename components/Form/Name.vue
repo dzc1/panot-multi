@@ -7,12 +7,12 @@
       >
     </div>
     <span @click="emitCloseUp">
-      <XCircleIcon class="h-8 w-8 text-black"
-    /></span>
+      <XCircleIcon class="h-8 w-8 text-black" />
+    </span>
   </div>
 
   <div class="mb-6">
-    <div class="max-w-full">
+    <div class="w-[30vh] md:w-[60vh]">
       <label class="block mb-1.5 text-sm text-gray-900 font-semibold" for="name"
         >Full Name</label
       >
@@ -20,9 +20,12 @@
         class="w-full py-3 px-4 text-sm text-gray-900 placeholder-gray-400 border border-gray-200 focus:border-black focus:outline-black rounded-lg"
         v-model="formSteps.fullName"
         type="text"
-        placeholder="I.E Michael Scott"
+        :pattern="getFullNameRegexPattern()"
         id="name"
       />
+      <p class="text-red-500 text-sm mt-1" v-if="isFullNameInvalid">
+        {{ fullNameErrorMessage }}
+      </p>
     </div>
     <div class="mt-8">
       <button
@@ -31,7 +34,7 @@
           isFullNameFilled ? 'bg-gray-200 text-gray-300' : 'bg-black text-white'
         "
         @click="nextStep"
-        :disabled="isFullNameFilled"
+        :disabled="isFullNameFilled || isFullNameInvalid"
       >
         Next
       </button>
@@ -71,6 +74,38 @@ const nextStep = () => {
 const isFullNameFilled = computed(() => {
   return formSteps.fullName === "";
 });
+
+const isFullNameInvalid = computed(() => {
+  const fullNamePattern = getFullNameRegexPattern();
+  return !fullNamePattern.test(formSteps.fullName);
+});
+const fullNameErrorMessage = computed(() => {
+  const fullNamePattern = getFullNameRegexPattern();
+  if (fullNamePattern.source === ".*") {
+    return ""; // No error message for empty input
+  } else {
+    return "Invalid name format"; // Error message for invalid input
+  }
+});
+
+const getFullNameRegexPattern = () => {
+  const fullName = formSteps.fullName.trim(); // Remove leading/trailing whitespace
+
+  if (fullName === "") {
+    // Empty input, any value is allowed
+    return new RegExp(".*");
+  } else if (
+    fullName.length < 5 || // Exclude names shorter than 4 characters
+    fullName === fullName.toUpperCase() || // Exclude all uppercase names
+    /([a-zA-Z])\1{2,}/.test(fullName) // || // Exclude repetitive sequences of the same letter (e.g., "aaa")
+    // !/^\d{4}[a-zA-Z]+$/.test(fullName) // Check if the first 4 characters are numbers followed by letters
+  ) {
+    return new RegExp("(?!.*)."); // Negative lookahead to ensure no matches
+  } else {
+    // Allow any non-empty value
+    return new RegExp(".+");
+  }
+};
 </script>
 
 <style scoped></style>

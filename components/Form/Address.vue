@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between mb-4 md:mb-8 items-center">
+  <div class="flex justify-between mb-4 md:mb-8 items-center w-[40vh]">
     <div class="flex justify-center w-full">
       <span
         class="inline-block uppercase py-1 px-3 text-xs font-semibold text-black bg-gray-50 rounded-full"
@@ -11,7 +11,7 @@
     /></span>
   </div>
 
-  <div class="mb-4 max-w-full">
+  <div class="mb-4">
     <label
       class="block mb-1.5 text-sm text-gray-900 font-semibold"
       for="address"

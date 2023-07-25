@@ -3,7 +3,8 @@
     <div class="flex justify-center w-full">
       <span
         class="inline-block uppercase py-1 px-3 text-xs font-semibold text-black bg-gray-50 rounded-full"
-        >location</span
+      >
+        {{ $t("comp-location-informational-tab") }}</span
       >
     </div>
     <span @click="emitCloseUp">
@@ -17,11 +18,10 @@
       >
         <div class="max-w-2xs mx-auto text-center">
           <h5 class="text-2xl font-montserrat text-gray-900">
-            Sotogrande, Spain
+            {{ $t("comp-location-city-sotogrande") }}
           </h5>
-          <p class="text-black font-monserrat h-24">
-            Explore Sotogrande's hidden gems and iconic landmarks with Panot on
-            two wheels, creating memories that will last a lifetime.
+          <p class="text-black font-monserrat h-3/6">
+            {{ $t("comp-location-city-sotogrande-info") }}
           </p>
           <button
             @click="selectCity('Sotogrande')"
@@ -38,11 +38,10 @@
       >
         <div class="max-w-2xs mx-auto text-center">
           <h5 class="text-2xl font-montserrat text-gray-900 mb-3">
-            Fuerteventura, Spain
+            {{ $t("comp-location-city-fuerteventura") }}
           </h5>
-          <p class="text-black font-monserrat h-24">
-            Immerse yourself in Fuerteventura's unique culture and natural
-            wonders with Panot as you pedal through stunning nature reserves.
+          <p class="text-black font-monserrat h-3/6">
+            {{ $t("comp-location-city-fuerteventura-info") }}
           </p>
           <button
             @click="selectCity('Fuerteventura')"
