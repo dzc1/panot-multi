@@ -9,10 +9,16 @@
             for="locale-select"
             >{{ $t("language") }}:
           </label>
-          <select id="locale-select" v-model="$i18n.locale">
-            <option value="en">en</option>
-            <option value="es">en</option>
-          </select>
+          <div class="flex items-center justify-center">
+            <select
+              class="w-1/4 py-2 px-4 text-sm text-black font-monserrat border border-gray-200 focus:border-green-600 focus:outline-green-600 rounded-lg"
+              id="locale-select"
+              v-model="$i18n.locale"
+            >
+              <option value="en">en</option>
+              <option value="es">en</option>
+            </select>
+          </div>
         </form>
         <h1 class="font-montserrat">
           {{ $t("h1-home") }}
