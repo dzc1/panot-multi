@@ -91,6 +91,9 @@ import Passport from "../components/Form/Passport.vue";
 import Phone from "../components/Form/Phone.vue";
 import Email from "../components/Form/Email.vue";
 import Summary from "../components/Form/Summary.vue";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n(); // use as global scope
 
 let formSteps = reactive({
   step: 2,
@@ -100,52 +103,52 @@ let formSteps = reactive({
     Sotogrande: [
       {
         id: 1,
-        name: "½ day (4 hours) for 30€",
-        timeFrame: "½ day",
+        name: t("sotogrande[0].name"),
+        timeFrame: t("sotogrande[0].timeFrame"),
         paymentLink: "https://pay.panotmobility.com/b/6oEg1i8GOfL5cQE9B3",
       },
       {
         id: 2,
-        name: "1 day (8 hours) for €40",
-        timeFrame: "1 day",
+        name: t("sotogrande[1].name"),
+        timeFrame: t("sotogrande[1].timeFrame"),
         paymentLink: "https://pay.panotmobility.com/b/bIY8yQ5uC7ezaIw6oQ",
       },
       {
         id: 3,
-        name: "7 days (20% off) for €32/day",
-        timeFrame: "7 days",
+        name: t("sotogrande[2].name"),
+        timeFrame: t("sotogrande[2].timeFrame"),
         paymentLink: "https://pay.panotmobility.com/b/bIY16o0aifL517WaF5",
       },
       {
         id: 4,
-        name: "14 days or more (30% off) for €28/day",
-        timeFrame: "14 days",
+        name: t("sotogrande[3].name"),
+        timeFrame: t("sotogrande[3].timeFrame"),
         paymentLink: "https://pay.panotmobility.com/b/dR67uM6yGeH1aIwdRg",
       },
     ],
     Fuerteventura: [
       {
         id: 1,
-        name: "½ day (4 hours) for 24€",
-        timeFrame: "½ day",
+        name: t("fuerteventura[0].name"),
+        timeFrame: t("fuerteventura[0].timeFrame"),
         paymentLink: "https://pay.panotmobility.com/b/28o9CU8GO0Qb17W6oK",
       },
       {
         id: 2,
-        name: "1 day (8 hours) for €29",
-        timeFrame: "1 day",
+        name: t("fuerteventura[1].name"),
+        timeFrame: t("fuerteventura[1].timeFrame"),
         paymentLink: "https://pay.panotmobility.com/b/8wM3ew0aicyTeYMcN9",
       },
       {
         id: 3,
-        name: "7 days (20% off) for €23/day",
-        timeFrame: "7 days",
+        name: t("fuerteventura[2].name"),
+        timeFrame: t("fuerteventura[2].timeFrame"),
         paymentLink: "https://pay.panotmobility.com/b/eVa6qI0ai0QbdUI5kI",
       },
       {
         id: 4,
-        name: "14 days or more (30% off) for €20/day",
-        timeFrame: "14 days",
+        name: t("fuerteventura[3].name"),
+        timeFrame: t("fuerteventura[3].timeFrame"),
         paymentLink: "https://pay.panotmobility.com/b/aEUdTa8GOdCX4k87sR",
       },
     ],

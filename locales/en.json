@@ -8,5 +8,66 @@
   "comp-location-city-sotogrande": "Sotogrande, Spain",
   "comp-location-city-sotogrande-info": "Explore Sotogrande's hidden gems and iconic landmarks with Panot on two wheels, creating memories that will last a lifetime.",
   "comp-location-city-fuerteventura": "Fuerteventura, Spain",
-  "comp-location-city-fuerteventura-info": " Immerse yourself in Fuerteventura's unique culture and natural wonders with Panot as you pedal through stunning nature reserves."
+  "comp-location-city-fuerteventura-info": " Immerse yourself in Fuerteventura's unique culture and natural wonders with Panot as you pedal through stunning nature reserves.",
+  "days-tab": "Choose Days",
+  "sotogrande": [
+    {
+      "name": "½ day (4 hours) for 30€",
+      "timeFrame": "½ day"
+    },
+    {
+      "name": "1 day (8 hours) for €40",
+      "timeFrame": "1 day"
+    },
+    {
+      "name": "7 days (20% off) for €32/day",
+      "timeFrame": "7 days"
+    },
+    {
+      "name": "14 days or more (30% off) for €28/day",
+      "timeFrame": "14 days"
+    }
+  ],
+  "fuerteventura": [
+    {
+      "name": "½ day (4 hours) for 24€",
+      "timeFrame": "½ day"
+    },
+    {
+      "name": "1 day (8 hours) for €29",
+      "timeFrame": "1 day"
+    },
+    {
+      "name": "7 days (20% off) for €23/day",
+      "timeFrame": "7 days"
+    },
+    {
+      "name": "14 days or more (30% off) for €20/day",
+      "timeFrame": "14 days"
+    }
+  ],
+  "previous-cta": "Previous",
+  "next-cta": "Next",
+  "name-tab": "Name",
+  "name-name-label": "Full Name",
+  "address-tab": "Address",
+  "addressForm": {
+    "address": "Address",
+    "city": "City",
+    "state": "State",
+    "country": "Country",
+    "zipCode": "Postal Code"
+  },
+  "comp-id": {
+    "tab": "Passport or Id Number",
+    "formLabel": "Passport or Id Number"
+  },
+  "comp-phoneNumber": {
+    "tab": "Phone Number",
+    "formLabel": "Phone Number"
+  },
+  "comp-email": {
+    "tab": "Email",
+    "formLabel": "Email"
+  }
 }

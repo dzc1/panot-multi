@@ -3,8 +3,8 @@
     <div class="flex justify-center w-full">
       <span
         class="inline-block uppercase py-1 px-3 text-xs font-semibold text-black bg-gray-50 rounded-full"
-        >choose days</span
-      >
+        >{{ $t("days-tab") }}
+      </span>
     </div>
     <span @click="emitCloseUp">
       <XCircleIcon class="h-8 w-8 text-black"
@@ -42,7 +42,7 @@
         class="w-full border text-black rounded-md px-4 py-2 hover:bg-black hover:text-white"
         @click="prevStep"
       >
-        Previous
+        {{ $t("previous-cta") }}
       </button>
     </div>
 

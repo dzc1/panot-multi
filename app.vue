@@ -15,14 +15,14 @@
               id="locale-select"
               v-model="$i18n.locale"
             >
-              <option value="en">en</option>
-              <option value="es">en</option>
+              <option value="en">English</option>
+              <option value="es">Español</option>
             </select>
           </div>
         </form>
         <h1 class="font-montserrat">
           {{ $t("h1-home") }}
-          <span
+          <span class="block"
             ><img class="inline" src="./assets/imgs/panot-white.webp" alt="" />
           </span>
         </h1>

@@ -8,5 +8,66 @@
   "comp-location-city-sotogrande": "Sotogrande, España",
   "comp-location-city-sotogrande-info": "Explora las joyas ocultas y los lugares emblemáticos de Sotogrande con Panot sobre dos ruedas y crea recuerdos que durarán toda la vida.",
   "comp-location-city-fuerteventura": "Fuerteventura, España",
-  "comp-location-city-fuerteventura-info": "Sumérgete en la cultura única de Fuerteventura y en sus maravillas naturales con Panot mientras pedaleas por impresionantes reservas naturales."
+  "comp-location-city-fuerteventura-info": "Sumérgete en la cultura única de Fuerteventura y en sus maravillas naturales con Panot mientras pedaleas por impresionantes reservas naturales.",
+  "days-tab": "Elegir días",
+  "sotogrande": [
+    {
+      "name": "½ día (4 horas) por €30",
+      "timeFrame": "½ día"
+    },
+    {
+      "name": "1 día (8 horas) por €40",
+      "timeFrame": "1 día"
+    },
+    {
+      "name": "7 días (20% de descuento) por €32/día",
+      "timeFrame": "7 días"
+    },
+    {
+      "name": "14 días o más (30% de descuento) por €28/día",
+      "timeFrame": "14 días"
+    }
+  ],
+  "fuerteventura": [
+    {
+      "name": "½ día (4 horas) por €24",
+      "timeFrame": "½ día"
+    },
+    {
+      "name": "1 día (8 horas) por €29",
+      "timeFrame": "1 día"
+    },
+    {
+      "name": "7 días (20% de descuento) por €23/día",
+      "timeFrame": "7 días"
+    },
+    {
+      "name": "14 días o más (30% de descuento) por €20/día",
+      "timeFrame": "14 días"
+    }
+  ],
+  "previous-cta": "Anterior",
+  "next-cta": "Siguiente",
+  "name-tab": "Nombre",
+  "name-name-label": "Nombre Completo",
+  "address-tab": "Dirección",
+  "addressForm": {
+    "address": "Dirección",
+    "city": "Ciudad",
+    "state": "Estado",
+    "country": "País",
+    "zipCode": "Código Postal"
+  },
+  "comp-id": {
+    "tab": "Pasaporte o número de identificación",
+    "formLabel": "Número de pasaporte o de documento de identidad"
+  },
+  "comp-phoneNumber": {
+    "tab": "Número de Teléfono",
+    "formLabel": "Número de Teléfono"
+  },
+  "comp-email": {
+    "tab": "Correo Electrónico",
+    "formLabel": "Correo Electrónico"
+  }
 }
