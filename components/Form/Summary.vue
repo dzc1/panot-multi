@@ -1,10 +1,18 @@
 <template>
   <div class="overflow-y-auto">
+    <div class="flex justify-between mb-4 items-center">
+      <div class="flex justify-center w-full">
+        <span
+          class="inline-block uppercase py-1 px-3 text-xs font-semibold text-black bg-gray-50 rounded-full"
+        >
+          Summary</span
+        >
+      </div>
+      <span @click="emitCloseUp">
+        <XCircleIcon class="h-8 w-8 text-black"
+      /></span>
+    </div>
     <div class="text-center">
-      <span
-        class="inline-block py-1 px-3 mb-4 text-xs font-semibold text-black bg-gray-50 rounded-full"
-        >Summary</span
-      >
       <h2 class="font-monserrat text-2xl font-semibold text-gray-800">
         Form Summary
       </h2>
@@ -148,8 +156,9 @@
 <script setup>
 import Vue3Signature from "vue3-signature";
 import { ref, reactive } from "vue";
+import { XCircleIcon } from "@heroicons/vue/24/solid";
 
-let emits = defineEmits(["signatureCaptured", "payButton"]);
+let emits = defineEmits(["signatureCaptured", "payButton", "closeUp"]);
 
 defineProps({
   formSteps: {
@@ -189,6 +198,11 @@ const emitSignature = () => {
 
 const pay = () => {
   emits("payButton");
+};
+
+const emitCloseUp = () => {
+  console.log("Testt");
+  emits("closeUp");
 };
 </script>
 

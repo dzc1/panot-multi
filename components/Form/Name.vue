@@ -13,7 +13,7 @@
   </div>
 
   <div class="mb-6">
-    <div class="w-[30vh] md:w-[60vh]">
+    <div>
       <label
         class="block mb-1.5 text-sm text-gray-900 font-semibold"
         for="name"

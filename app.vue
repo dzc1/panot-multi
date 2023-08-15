@@ -35,13 +35,23 @@
     <!-- Overlay Section -->
 
     <div v-if="showOverlay" class="overlay">
-      <div class="p-2 md:p-4 flex items-center">
+      <div
+        class="w-4/5 sm:w-11/12 md:w-3/4 lg:w-5/6 xl:w-85vw mt-[10%] lg:mt-[5%]"
+      >
+        <!-- Your content goes here T-->
         <div
           :class="['overlay-content', { 'animate-slide-in': animateOverlay }]"
         >
           <Form @closeFunction="overlayFunc" />
         </div>
       </div>
+      <!-- <div class="p-2 md:p-4 flex items-center">
+        <div
+          :class="['overlay-content', { 'animate-slide-in': animateOverlay }]"
+        >
+          <Form @closeFunction="overlayFunc" />
+        </div>
+      </div> -->
     </div>
   </section>
 </template>
@@ -50,10 +60,38 @@
 import { exportToPDF } from "#imports";
 const showOverlay = ref(false);
 const animateOverlay = ref(false);
-const overlayFunc = () => {
+
+// Use ref to create a reactive data property
+const isStepNine = ref(false);
+const overlayFunc = (stepNumber) => {
   showOverlay.value = !showOverlay.value;
   animateOverlay.value = !animateOverlay.value;
+  console.log(`Step number emitted from form component: ${stepNumber}`);
+
+  // Check if the emitted step number is 9 (form summary)
+  if (stepNumber === 9) {
+    // Apply the styling when step 9 is emitted
+    isStepNine.value = true;
+  } else {
+    // Remove the styling when any other step is emitted
+    isStepNine.value = false;
+  }
 };
+
+// Watch the isStepNine property and apply CSS styling accordingly
+watch(isStepNine, (newValue) => {
+  // Get the overlay element
+  const overlayElement = document.querySelector(".overlay");
+
+  if (overlayElement) {
+    // Apply CSS styling based on the value of isStepNine
+    if (newValue) {
+      overlayElement.classList.add("mt-[10%]");
+    } else {
+      overlayElement.classList.remove("mt-[10%]");
+    }
+  }
+});
 </script>
 
 <style>
@@ -80,7 +118,7 @@ section {
   @apply w-full md:w-1/2 bg-white text-black hover:bg-transparent hover:border  hover:text-white p-6 py-4 rounded-lg;
 }
 .overlay {
-  @apply fixed inset-0 flex items-center md:items-center justify-center bg-black bg-opacity-75 z-20 overflow-y-auto h-full;
+  @apply fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-20 overflow-y-auto h-full;
 }
 
 .overlay-content {

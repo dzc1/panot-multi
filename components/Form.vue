@@ -1,80 +1,95 @@
 <template>
   <div>
     <template v-if="formSteps.step === 1">
-      <button @click="nextStep">Start Form</button>
+      <div class="form-step fade-in">
+        <button @click="nextStep">Start Form</button>
+      </div>
     </template>
     <!-- Step 2 -->
     <template v-else-if="formSteps.step === 2">
-      <Location @emitChildCity="selectCity" @emitChildClose="emitCloseUp" />
+      <div class="form-step fade-in">
+        <Location @emitChildCity="selectCity" @emitChildClose="emitCloseUp" />
+      </div>
     </template>
     <!-- Step 3 -->
     <template v-else-if="formSteps.step === 3">
-      <Days
-        :formSteps="formSteps"
-        @currentBikeEmit="selectBike"
-        @prevStep="prevStep"
-        @closeUp="emitCloseUp"
-        @nextStep="nextStep"
-      />
+      <div class="form-step fade-in">
+        <Days
+          :formSteps="formSteps"
+          @currentBikeEmit="selectBike"
+          @prevStep="prevStep"
+          @closeUp="emitCloseUp"
+          @nextStep="nextStep"
+        />
+      </div>
     </template>
     <!-- Step 4 -->
     <template v-else-if="formSteps.step === 4">
-      <Name
-        v-model:fullName="formSteps.fullName"
-        @prevStep="prevStep"
-        @closeUp="emitCloseUp"
-        @nextStep="nextStep"
-      />
+      <div class="form-step fade-in">
+        <Name
+          v-model:fullName="formSteps.fullName"
+          @prevStep="prevStep"
+          @closeUp="emitCloseUp"
+          @nextStep="nextStep"
+        />
+      </div>
     </template>
     <!-- Step 5 -->
     <template v-else-if="formSteps.step === 5">
-      <Address
-        v-model:address="formSteps.address"
-        @prevStep="prevStep"
-        @closeUp="emitCloseUp"
-        @nextStep="nextStep"
-      />
+      <div class="form-step fade-in">
+        <Address
+          v-model:address="formSteps.address"
+          @prevStep="prevStep"
+          @closeUp="emitCloseUp"
+          @nextStep="nextStep"
+        />
+      </div>
     </template>
     <!-- Step 6 -->
     <template v-else-if="formSteps.step === 6">
-      <Passport
-        v-model:passportNumber="formSteps.passportNumber"
-        @prevStep="prevStep"
-        @closeUp="emitCloseUp"
-        @nextStep="nextStep"
-      />
+      <div class="form-step fade-in">
+        <Passport
+          v-model:passportNumber="formSteps.passportNumber"
+          @prevStep="prevStep"
+          @closeUp="emitCloseUp"
+          @nextStep="nextStep"
+        />
+      </div>
     </template>
     <!-- Step 7 -->
     <template v-else-if="formSteps.step === 7">
-      <Phone
-        v-model:phoneContact="formSteps.phoneContact"
-        @prevStep="prevStep"
-        @closeUp="emitCloseUp"
-        @nextStep="nextStep"
-      />
+      <div class="form-step fade-in">
+        <Phone
+          v-model:phoneContact="formSteps.phoneContact"
+          @prevStep="prevStep"
+          @closeUp="emitCloseUp"
+          @nextStep="nextStep"
+        />
+      </div>
     </template>
     <!-- Step 8 -->
     <template v-else-if="formSteps.step === 8">
-      <Email
-        v-model:email="formSteps.email"
-        @prevStep="prevStep"
-        @closeUp="emitCloseUp"
-        @nextStep="nextStep"
-      />
+      <div class="form-step fade-in">
+        <Email
+          v-model:email="formSteps.email"
+          @prevStep="prevStep"
+          @closeUp="emitCloseUp"
+          @nextStep="nextStep"
+        />
+      </div>
     </template>
     <!-- Step 9 -->
     <template v-else-if="formSteps.step === 9">
-      <Summary
-        :formSteps="formSteps"
-        @signatureCaptured="submitForm"
-        @payButton="testPayment"
-      />
+      <div class="form-step fade-in">
+        <Summary
+          :formSteps="formSteps"
+          @signatureCaptured="submitForm"
+          @closeUp="emitCloseUp"
+          @payButton="testPayment"
+        />
+      </div>
     </template>
   </div>
-
-  <!-- <div>
-    <h1>Summary of Form</h1>
-  </div> -->
 </template>
 
 <script setup>
@@ -209,7 +224,8 @@ const selectBike = (bike) => {
 const emits = defineEmits("closeFunction");
 
 let emitCloseUp = () => {
-  emits("closeFunction");
+  const stepNumber = 9;
+  emits("closeFunction", stepNumber);
 };
 
 let date = ref(new Date().toISOString().slice(0, 10));
@@ -295,3 +311,22 @@ const submitForm = async (signature) => {
   );
 };
 </script>
+
+<style scoped>
+.form-step {
+  opacity: 0;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+</style>
