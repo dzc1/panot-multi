@@ -88,7 +88,7 @@
         @click="signatureDisplay = !signatureDisplay"
         class="w-full bg-black text-white rounded-md px-4 py-2 hover:border hover:text-black hover:bg-transparent my-4"
       >
-        SIGN
+        {{ $t("comp-summary.sign") }}
       </button>
     </div>
     <div>
@@ -106,7 +106,7 @@
             class="border text-black rounded-md px-4 py-2 hover:border hover:text-white hover:bg-black mb-4"
             @click="clearSignature"
           >
-            Clear
+            {{ $t("comp-summary.clear") }}
           </button>
           <button
             class="rounded-md px-4 py-2 mb-4"
@@ -117,14 +117,14 @@
                 : 'bg-black text-white  hover:bg-transparent hover:text-black cursor-pointer '
             "
           >
-            Download Confirmation Form
+            {{ $t("comp-summary.download") }}
           </button>
           <button
             class="bg-black text-white rounded-md px-4 py-2 hover:text-black hover:bg-transparent mb-8"
             @click="pay"
             :disabled="buttonHide"
           >
-            Pay
+            {{ $t("comp-summary.pay") }}
           </button>
         </div>
       </div>

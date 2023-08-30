@@ -88,6 +88,10 @@
     "statementFiveA": "V. - Declaro que",
     "statementFiveB": "soy consciente de que el riesgo asociado al uso del eBike no está cubierto por ningún seguro, y seré el único responsable de cualquier daño o lesión que pueda sufrir o causar a terceros durante su uso, liberando al establecimiento, a PANOT y a terceros que proporcionaron el eBike al establecimiento de cualquier responsabilidad al respecto.",
     "statementSix": "VI. - Declaro que soy consciente de la obligación de devolver el eBike (y accesorios) en las mismas condiciones en que me fue entregado, y que los daños, pérdidas o robos del eBike no están cubiertos por ningún seguro. Me comprometo a asumir los costos de su reparación en caso de devolución en mal estado, y el precio completo de la bicicleta en caso de devolución en condiciones inservibles o no devolución.",
-    "statementSeven": "VII. - Declaro que soy consciente de que el eBike está equipado con un sistema móvil GPS, que autorizo para que PANOT pueda localizarlo en caso de pérdida o robo."
+    "statementSeven": "VII. - Declaro que soy consciente de que el eBike está equipado con un sistema móvil GPS, que autorizo para que PANOT pueda localizarlo en caso de pérdida o robo.",
+    "sign": "Firmar",
+    "clear": "Borrar",
+    "download": "Descargar Formulario de Confirmación",
+    "pay": "Pagar"
   }
 }
