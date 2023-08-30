@@ -69,5 +69,25 @@
   "comp-email": {
     "tab": "Correo Electrónico",
     "formLabel": "Correo Electrónico"
+  },
+  "comp-summary": {
+    "tab": "Resumen",
+    "formLabel": "Resumen del Formulario",
+    "city": "Ciudad",
+    "days": "Días",
+    "name": "Nombre",
+    "email": "Correo Electrónico",
+    "id": "Número de Pasaporte o ID",
+    "phone": "Número de Teléfono",
+    "address": "Dirección",
+    "statment": "Declaro:",
+    "statementOne": "I. Asumo la responsabilidad del eBike PANOT y los accesorios que lo acompañan (cesta y soporte para móvil) desde el momento de la entrega hasta su devolución.",
+    "statementTwo": "II. Me comprometo a usarlo con la debida diligencia, de acuerdo con sus características y uso previstos (urbano) y cumpliendo con las normas de tráfico, estando obligado a compensar a PANOT, al establecimiento y/o a terceros que proporcionaron el eBike al establecimiento por cualquier daño que pueda surgir de mi incumplimiento de tales obligaciones.",
+    "statementThree": "III. - Confirmo el estado del eBike antes de firmar este documento y que está en perfectas condiciones estéticas y técnicas, habiendo verificado su correcto funcionamiento.",
+    "statementFour": "IV. Declaro que soy consciente de que el eBike sólo puede ser utilizado por la persona designada para ese propósito por el establecimiento.",
+    "statementFiveA": "V. - Declaro que",
+    "statementFiveB": "soy consciente de que el riesgo asociado al uso del eBike no está cubierto por ningún seguro, y seré el único responsable de cualquier daño o lesión que pueda sufrir o causar a terceros durante su uso, liberando al establecimiento, a PANOT y a terceros que proporcionaron el eBike al establecimiento de cualquier responsabilidad al respecto.",
+    "statementSix": "VI. - Declaro que soy consciente de la obligación de devolver el eBike (y accesorios) en las mismas condiciones en que me fue entregado, y que los daños, pérdidas o robos del eBike no están cubiertos por ningún seguro. Me comprometo a asumir los costos de su reparación en caso de devolución en mal estado, y el precio completo de la bicicleta en caso de devolución en condiciones inservibles o no devolución.",
+    "statementSeven": "VII. - Declaro que soy consciente de que el eBike está equipado con un sistema móvil GPS, que autorizo para que PANOT pueda localizarlo en caso de pérdida o robo."
   }
 }

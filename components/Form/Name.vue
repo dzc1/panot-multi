@@ -25,6 +25,7 @@
         type="text"
         :pattern="getFullNameRegexPattern()"
         id="name"
+        :placeholder="fullnameProp ? fullnameProp : 'Default Name'"
       />
       <p class="text-red-500 text-sm mt-1" v-if="isFullNameInvalid">
         {{ fullNameErrorMessage }}
@@ -32,6 +33,14 @@
     </div>
     <div class="mt-8">
       <button
+        v-if="fullnameProp"
+        class="w-full rounded-md px-4 py-2 mb-4 bg-black text-white"
+        @click="nextStep"
+      >
+        {{ $t("next-cta") }}
+      </button>
+      <button
+        v-else
         class="w-full rounded-md px-4 py-2 mb-4"
         :class="
           isFullNameFilled ? 'bg-gray-200 text-gray-300' : 'bg-black text-white'
@@ -53,6 +62,12 @@
 
 <script setup>
 import { XCircleIcon } from "@heroicons/vue/24/solid";
+defineProps({
+  fullnameProp: {
+    type: String,
+  },
+});
+
 let emits = defineEmits(["prevStep", "closeUp", "nextStep", "update:fullName"]);
 const formSteps = reactive({
   fullName: "",

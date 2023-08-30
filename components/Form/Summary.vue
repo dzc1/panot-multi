@@ -5,7 +5,7 @@
         <span
           class="inline-block uppercase py-1 px-3 text-xs font-semibold text-black bg-gray-50 rounded-full"
         >
-          Summary</span
+          {{ $t("comp-summary.tab") }}</span
         >
       </div>
       <span @click="emitCloseUp">
@@ -14,38 +14,39 @@
     </div>
     <div class="text-center">
       <h2 class="font-monserrat text-2xl font-semibold text-gray-800">
-        Form Summary
+        {{ $t("comp-summary.formLabel") }}
       </h2>
       <div class="text-left py-2">
         <p class="font-monserrat text-gray-900 mb-2">
-          City
+          {{ $t("comp-summary.city") }}
           <span class="font-semibold block">{{ formSteps.selectedCity }}</span>
         </p>
         <p class="font-monserrat text-gray-900 mb-2">
-          Days
+          {{ $t("comp-summary.days") }}
           <span class="font-semibold block">{{
             formSteps.selectedBike.name
           }}</span>
         </p>
         <p class="font-monserrat text-gray-900 mb-2">
-          Name
+          {{ $t("comp-summary.name") }}
           <span class="font-semibold block">{{ formSteps.fullName }}</span>
         </p>
         <p class="font-monserrat text-gray-900 mb-2">
-          Email <span class="font-semibold block">{{ formSteps.email }}</span>
+          {{ $t("comp-summary.email") }}
+          <span class="font-semibold block">{{ formSteps.email }}</span>
         </p>
         <p class="font-monserrat text-gray-900 mb-2">
-          Passport or ID Number
+          {{ $t("comp-summary.id") }}
           <span class="font-semibold block">{{
             formSteps.passportNumber
           }}</span>
         </p>
         <p class="font-monserrat text-gray-900 mb-2">
-          Phone Number
+          {{ $t("comp-summary.phone") }}
           <span class="font-semibold block">{{ formSteps.phoneContact }}</span>
         </p>
         <p class="font-monserrat text-gray-900 mb-2">
-          Address
+          {{ $t("comp-summary.address") }}
           <span class="font-semibold block"
             >{{ formSteps.address.address.address }},
             {{ formSteps.address.address.city }},
@@ -56,52 +57,30 @@
         </p>
       </div>
       <div class="text-left">
-        <p class="font-semibold text-gray-900">I Declare:</p>
-        <p class="text-sm font-montserrat font-light mb-2">
-          I. That I take responsibility for the eBike PANOT and the accompanying
-          accessories (basket and mobile holder) from the moment of delivery
-          until its return.
+        <p class="font-semibold text-gray-900">
+          {{ $t("comp-summary.statement") }}
         </p>
         <p class="text-sm font-montserrat font-light mb-2">
-          II. That I commit to using it with due diligence, in accordance with
-          its intended characteristics and use (urban) and complying with
-          traffic regulations, being obligated to compensate PANOT, the
-          establishment, and/or third parties who provided the eBike to the
-          establishment for any damages that may arise from my failure to comply
-          with such obligations.
+          {{ $t("comp-summary.statementOne") }}
         </p>
         <p class="text-sm font-montserrat font-light mb-2">
-          III. - That I have confirmed the condition of the eBike prior to
-          signing this document and that it is in perfect aesthetic and
-          technical condition, having verified its proper functioning.
+          {{ $t("comp-summary.statementTwo") }}
         </p>
         <p class="text-sm font-montserrat font-light mb-2">
-          IV. That I declare that I am aware that the eBike can only be used by
-          the person designated for that purpose by the establishment.
+          {{ $t("comp-summary.statementThree") }}
         </p>
         <p class="text-sm font-montserrat font-light mb-2">
-          V. - That I declare that
-          <b class="font-bold"
-            >I am aware that the risk associated with the use of the eBike is
-            not covered by any insurance, and I will be solely responsible for
-            any damages or injuries that I may suffer or cause to third parties
-            during its use, releasing the establishment, PANOT, and third
-            parties who provided the eBike to the establishment from any
-            liability in this regard.</b
-          >
+          {{ $t("comp-summary.statementFour") }}
         </p>
         <p class="text-sm font-montserrat font-light mb-2">
-          VI. - That I declare that I am aware of the obligation to return the
-          eBike (and accessories) in the same condition in which it was
-          delivered to me, and that damages, loss, or theft of the eBike are not
-          covered by any insurance. I commit to assuming the costs of its repair
-          in case of return in poor condition, and the full price of the bike in
-          case of return in unserviceable conditions or non-return.
+          {{ $t("comp-summary.statementFiveA") }}
+          <b class="font-bold">{{ $t("comp-summary.statementFiveB") }}</b>
         </p>
         <p class="text-sm font-montserrat font-light mb-2">
-          VII. - That I declare that I am aware that the eBike is equipped with
-          a GPS mobile system, which I authorize so that PANOT can locate it in
-          case of loss or theft.
+          {{ $t("comp-summary.statementSix") }}
+        </p>
+        <p class="text-sm font-montserrat font-light mb-2">
+          {{ $t("comp-summary.statementSeven") }}
         </p>
       </div>
       <button

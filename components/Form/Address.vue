@@ -21,8 +21,10 @@
       class="w-full py-3 px-4 text-sm text-gray-900 placeholder-gray-400 border border-gray-200 focus:border-black focus:outline-black rounded-lg"
       v-model="formSteps.address.address"
       type="text"
-      placeholder="123 Sagrada Familia Rd"
       id="address"
+      :placeholder="
+        addressProp ? addressProp.address : formSteps.address.address
+      "
     />
   </div>
   <div class="mb-4">
@@ -33,7 +35,7 @@
       class="w-full py-3 px-4 text-sm text-gray-900 placeholder-gray-400 border border-gray-200 focus:border-black focus:outline-black rounded-lg"
       v-model="formSteps.address.city"
       type="text"
-      placeholder="Barcelona"
+      :placeholder="addressProp ? addressProp.city : formSteps.address.city"
       id="city"
     />
   </div>
@@ -47,7 +49,7 @@
       class="w-full py-3 px-4 text-sm text-gray-900 placeholder-gray-400 border border-gray-200 focus:border-black focus:outline-black rounded-lg"
       v-model="formSteps.address.state"
       type="text"
-      placeholder="Catalonia"
+      :placeholder="addressProp ? addressProp.state : formSteps.address.state"
       id="state"
     />
   </div>
@@ -62,7 +64,9 @@
       class="w-full py-3 px-4 text-sm text-gray-900 placeholder-gray-400 border border-gray-200 focus:border-black focus:outline-black rounded-lg"
       v-model="formSteps.address.country"
       type="text"
-      placeholder="Spain"
+      :placeholder="
+        addressProp ? addressProp.country : formSteps.address.country
+      "
       id="country"
     />
   </div>
@@ -74,12 +78,22 @@
       class="w-full py-3 px-4 text-sm text-gray-900 placeholder-gray-400 border border-gray-200 focus:border-black focus:outline-black rounded-lg"
       v-model="formSteps.address.postalCode"
       type="text"
-      placeholder="08011"
+      :placeholder="
+        addressProp ? addressProp.postalCode : formSteps.address.postalCode
+      "
       id="zip"
     />
   </div>
   <div class="">
     <button
+      v-if="addressProp"
+      class="w-full rounded-md px-4 py-2 mb-4 bg-black text-white"
+      @click="nextStep"
+    >
+      {{ $t("next-cta") }}
+    </button>
+    <button
+      v-else
       class="w-full rounded-md px-4 py-2 mb-4"
       :class="
         isFullNameFilled ? 'bg-gray-200 text-gray-300' : 'bg-black text-white'
@@ -107,6 +121,11 @@ let emits = defineEmits([
   "update:address",
   "",
 ]);
+defineProps({
+  addressProp: {
+    type: String,
+  },
+});
 const formSteps = reactive({
   address: {
     address: "",

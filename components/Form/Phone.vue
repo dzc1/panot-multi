@@ -12,7 +12,7 @@
     /></span>
   </div>
 
-  <div class="mb-6 w-[40vh]">
+  <div class="mb-6">
     <label
       class="block mb-1.5 text-sm text-gray-900 font-semibold"
       for="phone"
@@ -22,12 +22,20 @@
       class="w-full py-3 px-4 text-sm text-gray-900 placeholder-gray-400 border border-gray-200 focus:border-black focus:outline-black rounded-lg"
       v-model="formSteps.phoneContact"
       type="tel"
-      placeholder="+34 699 882 424"
+      :placeholder="phoneProp ? phoneProp : formSteps.phoneContact"
       id="phone"
     />
   </div>
   <div class="">
     <button
+      v-if="phoneProp"
+      class="w-full rounded-md px-4 py-2 mb-4 bg-black text-white"
+      @click="nextStep"
+    >
+      {{ $t("next-cta") }}
+    </button>
+    <button
+      v-else
       class="w-full rounded-md px-4 py-2 mb-4"
       :class="
         isFullNameFilled ? 'bg-gray-200 text-gray-300' : 'bg-black text-white'
@@ -54,6 +62,12 @@ let emits = defineEmits([
   "nextStep",
   "update:phoneContact",
 ]);
+defineProps({
+  phoneProp: {
+    type: String,
+  },
+});
+
 const formSteps = reactive({
   phoneContact: "",
 });

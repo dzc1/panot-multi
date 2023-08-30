@@ -21,12 +21,20 @@
       class="w-full py-3 px-4 text-sm text-gray-900 placeholder-gray-400 border border-gray-200 focus:border-black focus:outline-black rounded-lg"
       v-model="formSteps.email"
       type="email"
-      placeholder="carlos@panotmobility.com"
+      :placeholder="emailProp ? emailProp : formSteps.email"
       id="email"
     />
   </div>
   <div class="">
     <button
+      v-if="emailProp"
+      class="bg-black text-white w-full rounded-md px-4 py-2 mb-4"
+      @click="nextStep"
+    >
+      {{ $t("next-cta") }}
+    </button>
+    <button
+      v-else
       class="w-full rounded-md px-4 py-2 mb-4"
       :class="
         isFullNameFilled ? 'bg-gray-200 text-gray-300' : 'bg-black text-white'
@@ -50,6 +58,11 @@ import { XCircleIcon } from "@heroicons/vue/24/solid";
 let emits = defineEmits(["prevStep", "closeUp", "nextStep", "update:email"]);
 const formSteps = reactive({
   email: "",
+});
+defineProps({
+  emailProp: {
+    type: String,
+  },
 });
 
 const isFullNameFilled = computed(() => {

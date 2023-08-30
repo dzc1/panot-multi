@@ -11,7 +11,7 @@
     /></span>
   </div>
 
-  <div class="mb-6 w-[40vh]">
+  <div class="mb-6">
     <label
       class="block mb-1.5 text-sm text-gray-900 font-semibold"
       for="passport"
@@ -21,12 +21,20 @@
       class="w-full py-3 px-4 text-sm text-gray-900 placeholder-gray-400 border border-gray-200 focus:border-black focus:outline-black rounded-lg"
       v-model="formSteps.passportNumber"
       type="text"
-      placeholder="1234567890"
+      :placeholder="passportProp ? passportProp : formSteps.passportNumber"
       id="passport"
     />
   </div>
   <div class="">
     <button
+      v-if="passportProp"
+      class="w-full rounded-md px-4 py-2 mb-4 bg-black text-white"
+      @click="nextStep"
+    >
+      {{ $t("next-cta") }}
+    </button>
+    <button
+      v-else
       class="w-full rounded-md px-4 py-2 mb-4"
       :class="
         isFullNameFilled ? 'bg-gray-200 text-gray-300' : 'bg-black text-white'
@@ -53,6 +61,11 @@ let emits = defineEmits([
   "nextStep",
   "update:passportNumber",
 ]);
+defineProps({
+  passportProp: {
+    type: String,
+  },
+});
 const formSteps = reactive({
   passportNumber: "",
 });

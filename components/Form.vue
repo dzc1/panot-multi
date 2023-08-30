@@ -31,6 +31,7 @@
           @prevStep="prevStep"
           @closeUp="emitCloseUp"
           @nextStep="nextStep"
+          :fullnameProp="formSteps.fullName"
         />
       </div>
     </template>
@@ -38,6 +39,7 @@
     <template v-else-if="formSteps.step === 5">
       <div class="form-step fade-in">
         <Address
+          :addressProp="formSteps.address.address"
           v-model:address="formSteps.address"
           @prevStep="prevStep"
           @closeUp="emitCloseUp"
@@ -53,6 +55,7 @@
           @prevStep="prevStep"
           @closeUp="emitCloseUp"
           @nextStep="nextStep"
+          :passportProp="formSteps.passportNumber"
         />
       </div>
     </template>
@@ -64,6 +67,7 @@
           @prevStep="prevStep"
           @closeUp="emitCloseUp"
           @nextStep="nextStep"
+          :phoneProp="formSteps.phoneContact"
         />
       </div>
     </template>
@@ -75,6 +79,7 @@
           @prevStep="prevStep"
           @closeUp="emitCloseUp"
           @nextStep="nextStep"
+          :emailProp="formSteps.email"
         />
       </div>
     </template>
@@ -248,55 +253,38 @@ const submitForm = async (signature) => {
 
   // Add content to the document
   doc.text("Panot Mobility Rental Form", 105, 10, null, null, "center");
-  doc.text(
-    `
+
+  const marginLeft = 20;
+  const marginTop = 20;
+  const pageWidth = doc.internal.pageSize.width;
+  const marginRight = 20; // Set a right margin of 20 units
+  const maxLineWidth = pageWidth - marginLeft - marginRight;
+  const textContent = `
   I, ${formStepsData.fullName}, of legal age, residing at ${formStepsData.address.address.address}, ${formStepsData.address.address.city} ${formStepsData.address.address.state}, ${formStepsData.address.address.country} ${formStepsData.address.address.postalCode}.
-  With ID/Passport Number ${formStepsData.passportNumber}, contact telephone number ${formStepsData.phoneContact}
-  and email address  ${formStepsData.email}.
+  With ID/Passport Number ${formStepsData.passportNumber}, contact telephone number ${formStepsData.phoneContact} and email address ${formStepsData.email}.
 
   I Declare
 
-  I. That I take responsibility for the eBike PANOT and the accompanying accessories
-  (basket and mobile holder) from the moment of delivery until its return.
+  I. That I take responsibility for the eBike PANOT and the accompanying accessories (basket and mobile holder) from the moment of delivery until its return.
 
-  II. That I commit to using it with due diligence, in accordance with its intended characteristics
-  and use (urban) and complying with traffic regulations, being obligated to compensate PANOT,
-  the establishment, and/or third parties who provided the eBike to the establishment for any
-  damages that may arise from my failure to comply with such obligations.
+  II. That I commit to using it with due diligence, in accordance with its intended characteristics and use (urban) and complying with traffic regulations, being obligated to compensate PANOT, the establishment, and/or third parties who provided the eBike to the establishment for any damages that may arise from my failure to comply with such obligations.
 
-  III. - That I have confirmed the condition of the eBike prior to signing
-  this document and that it is in perfect aesthetic and technical condition, having verified
-  its proper functioning.
+  III. - That I have confirmed the condition of the eBike prior to signing this document and that it is in perfect aesthetic and technical condition, having verified its proper functioning.
 
-  IV. That I declare that I am aware that the eBike can only
-  be used by the person designated for that purpose by the establishment.
+  IV. That I declare that I am aware that the eBike can only be used by the person designated for that purpose by the establishment.
 
-  V. - That I declare that I am aware that the risk associated with
-  the use of the eBike is not covered by any insurance, and I will
-  be solely responsible for any damages or injuries that
-  I may suffer or cause to third parties during its use, releasing
-  the establishment, PANOT, and third parties who provided
-  the eBike to the establishment from any liability in this regard.
+  V. - That I declare that I am aware that the risk associated with the use of the eBike is not covered by any insurance, and I will be solely responsible for any damages or injuries that I may suffer or cause to third parties during its use, releasing the establishment, PANOT, and third parties who provided the eBike to the establishment from any liability in this regard.
 
-  VI. - That I declare that I am aware of the obligation
-  to return the eBike (and accessories) in the same condition in
-  which it was delivered to me, and that damages, loss, or theft
-  of the eBike are not covered by any insurance. I commit
-  to assuming the costs of its repair in case of return
-  in poor condition, and the full price of the bike in
-  case of return in unserviceable conditions or non-return.
+  VI. - That I declare that I am aware of the obligation to return the eBike (and accessories) in the same condition in which it was delivered to me, and that damages, loss, or theft of the eBike are not covered by any insurance. I commit to assuming the costs of its repair in case of return in poor condition, and the full price of the bike in case of return in unserviceable conditions or non-return.
 
-  VII. - That I declare that I am aware that the
-  eBike is equipped with a GPS mobile system,
-  which I authorize so that PANOT can locate
-  it in case of loss or theft.
+  VII. - That I declare that I am aware that the eBike is equipped with a GPS mobile system, which I authorize so that PANOT can locate it in case of loss or theft.
+  `;
+  const splitText = doc.splitTextToSize(textContent, maxLineWidth);
 
-  `,
-    20,
-    20
-  );
+  // Add the split text to the document
+  doc.text(splitText, marginLeft, marginTop);
 
-  doc.addImage(formSignature, "png", 20, 220, 50, 50);
+  doc.addImage(formSignature, "png", 20, 200, 100, 50);
   doc.text(
     `Signed by ${formStepsData.fullName} on ${formStepsData.selectedCity}, Spain on the date of ${date.value}.`,
     20,
