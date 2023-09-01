@@ -8,13 +8,6 @@
     <!-- Step 2 -->
     <template v-else-if="formSteps.step === 2">
       <div class="form-step fade-in">
-        <div class="border border-gray-500 p-2 rounded-sm" id="card-element" />
-        <p
-          id="card-error"
-          role="alert"
-          class="text-red-700 text-center font-semibold"
-        />
-        <button :disabled="isProcessing" @click="pay">Pay Now</button>
         <Location @emitChildCity="selectCity" @emitChildClose="emitCloseUp" />
       </div>
     </template>
@@ -109,14 +102,14 @@ import { useRuntimeConfig } from "nuxt/app";
 import { ref, reactive } from "vue";
 import { exportToPDF } from "#imports";
 import { jsPDF } from "jspdf";
-import Location from "../components/Form/Location.vue";
-import Days from "../components/Form/Days.vue";
-import Name from "../components/Form/Name.vue";
-import Address from "../components/Form/Address.vue";
-import Passport from "../components/Form/Passport.vue";
-import Phone from "../components/Form/Phone.vue";
-import Email from "../components/Form/Email.vue";
-import Summary from "../components/Form/Summary.vue";
+import Location from "./Form/Location.vue";
+import Days from "./Form/Days.vue";
+import Name from "./Form/Name.vue";
+import Address from "./Form/Address.vue";
+import Passport from "./Form/Passport.vue";
+import Phone from "./Form/Phone.vue";
+import Email from "./Form/Email.vue";
+import Summary from "./Form/Summary.vue";
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n(); // use as global scope
@@ -306,105 +299,6 @@ const submitForm = async (signature) => {
 };
 
 // TESTING STRIPE
-let stripe = null;
-let elements = null;
-let card = null;
-let clientSecret = ref(null);
-let isProcessing = ref(false);
-let currentAddress = ref("sksskks"); // This will be populated from formSteps.address
-
-const stripeInit = async () => {
-  const runtimeConfig = useRuntimeConfig().public;
-  stripe = new Stripe(runtimeConfig.stripePk);
-
-  let res = await fetch("server/api/paymentintent", {
-    method: "POST",
-    body: JSON.stringify({
-      amount: 1000, // Replace with your actual amount
-    }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const data = await res.json();
-  clientSecret.value = data.client_secret;
-
-  elements = stripe.elements();
-  var style = {
-    base: {
-      fontSize: "18px",
-    },
-    invalid: {
-      fontFamily: "Arial, sans-serif",
-      color: "#EE4B2B",
-      iconColor: "#EE4B2B",
-    },
-  };
-  card = elements.create("card", {
-    hidePostalCode: true,
-    style: style,
-  });
-
-  card.mount("#card-element");
-  card.on("change", function (event) {
-    document.querySelector("button").disabled = event.empty;
-    document.querySelector("#card-error").textContent = event.error
-      ? event.error.message
-      : "";
-  });
-};
-
-const pay = async () => {
-  if (!currentAddress.value) {
-    showError("Please add shipping address");
-    return;
-  }
-  isProcessing.value = true;
-
-  let result = await stripe.confirmCardPayment(clientSecret.value, {
-    payment_method: { card: card },
-  });
-
-  if (result.error) {
-    showError(result.error.message);
-    isProcessing.value = false;
-  } else {
-    await createOrder(result.paymentIntent.id);
-    // You can reset the form or navigate the user to a success page here
-  }
-};
-
-const createOrder = async (stripeId) => {
-  await fetch("http://localhost:3000/", {
-    method: "POST",
-    body: JSON.stringify({
-      // Populate with your actual data
-      userId: "USER_ID",
-      stripeId: stripeId,
-      name: "Diego Zito",
-      address: "C/ mallorca 373",
-      zipcode: "080013",
-      city: "Barcelona",
-      country: "Spain",
-      // Add other necessary details
-    }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-};
-
-const showError = (errorMsgText) => {
-  let errorMsg = document.querySelector("#card-error");
-  errorMsg.textContent = errorMsgText;
-  setTimeout(() => {
-    errorMsg.textContent = "";
-  }, 4000);
-};
-
-onMounted(() => {
-  stripeInit();
-});
 </script>
 
 <style scoped>

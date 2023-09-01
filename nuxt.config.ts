@@ -4,17 +4,20 @@ export default defineNuxtConfig({
     "@nuxtjs/tailwindcss",
     "@nuxtjs/google-fonts",
     "@sidebase/nuxt-pdf",
-    // "nuxt-stripe-module",
   ],
   runtimeConfig: {
     public: {
-      stripePk: process.env.STRIPE_PUBLISHABLE_KEY,
-      appUrl: "http://localhost:3000",
+      stripePk: process.env.STRIPE_PK_KEY,
     },
   },
   googleFonts: {
     families: {
       Monserrat: [100, 300, 400, 700],
+    },
+  },
+  app: {
+    head: {
+      script: [{ src: "https://js.stripe.com/v3/", defer: true }],
     },
   },
 });

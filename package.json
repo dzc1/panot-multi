@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "kobe": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
@@ -21,8 +21,9 @@
   "dependencies": {
     "@egoist/tailwindcss-icons": "^1.1.0",
     "@heroicons/vue": "^2.0.18",
-    "@stripe/stripe-js": "^1.54.1",
+    "@stripe/stripe-js": "^2.1.0",
     "jspdf": "^2.5.1",
+    "stripe": "^13.4.0",
     "vue3-signature": "^0.2.2"
   }
 }
