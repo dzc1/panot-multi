@@ -11,13 +11,9 @@ export default defineEventHandler(async (event) => {
   const res = await stripe.products.list();
   //console.log(res);
 
-  const lineItems = res.data.map((product) => ({
-    price: product.default_price,
-    quantity: 1,
-  }));
   //console.log(product)
   //console.log(lineItems);
-  const lineItemsTwo = [
+  const lineItems = [
     {
       price: body.products.default_price,
       quantity: body.products.quantity,
@@ -35,7 +31,7 @@ export default defineEventHandler(async (event) => {
     cancel_url: "http://localhost:3000", // Again, you might also want to set this conditionally for production and development environments
     success_url: successUrl,
     mode: "payment",
-    line_items: lineItemsTwo,
+    line_items: lineItems,
   });
 
   return session;
