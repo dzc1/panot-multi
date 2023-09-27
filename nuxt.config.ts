@@ -8,8 +8,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     stripeSecret: process.env.STRIPE_SK,
     productionSuccessURL: process.env.PRODUCTION,
-    developmentSuccessURL:
-      "http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}",
+    developmentSuccessURL: process.env.DEVELOPMENT,
     public: {
       appUrl: process.env.APP_URL,
       stripePk: process.env.STRIPE_PK,
