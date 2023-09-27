@@ -7,8 +7,7 @@ export default defineNuxtConfig({
   ],
   runtimeConfig: {
     stripeSecret: process.env.STRIPE_SK,
-    productionSuccessURL:
-      "https://panot-multi.vercel.app/success?session_id={CHECKOUT_SESSION_ID}",
+    productionSuccessURL: process.env.PRODUCTION,
     developmentSuccessURL:
       "http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}",
     public: {
