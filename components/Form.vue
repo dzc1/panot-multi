@@ -8,13 +8,6 @@
     <!-- Step 2 -->
     <template v-else-if="formSteps.step === 2">
       <div class="form-step fade-in">
-        <div class="border border-gray-500 p-2 rounded-sm" id="card-element" />
-        <p
-          id="card-error"
-          role="alert"
-          class="text-red-700 text-center font-semibold"
-        />
-        <button :disabled="isProcessing" @click="pay">Pay Now</button>
         <Location @emitChildCity="selectCity" @emitChildClose="emitCloseUp" />
       </div>
     </template>
@@ -97,15 +90,16 @@
           :formSteps="formSteps"
           @signatureCaptured="submitForm"
           @closeUp="emitCloseUp"
-          @payButton="testPayment"
+          @payButton="handleCheckoutTwo"
         />
+        {{ formSteps.selectedBike }}
       </div>
     </template>
   </div>
 </template>
 
 <script setup>
-import { useRuntimeConfig } from "nuxt/app";
+//import { StripeCheckout } from "@vue-stripe/vue-stripe";
 import { ref, reactive } from "vue";
 import { exportToPDF } from "#imports";
 import { jsPDF } from "jspdf";
@@ -120,7 +114,6 @@ import Summary from "../components/Form/Summary.vue";
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n(); // use as global scope
-
 let formSteps = reactive({
   step: 2,
   selectedCity: "",
@@ -132,24 +125,28 @@ let formSteps = reactive({
         name: t("sotogrande[0].name"),
         timeFrame: t("sotogrande[0].timeFrame"),
         paymentLink: "https://pay.panotmobility.com/b/6oEg1i8GOfL5cQE9B3",
+        stripeId: "price_1NQTAvI5XtUC28eOyWXp4uZi",
       },
       {
         id: 2,
         name: t("sotogrande[1].name"),
         timeFrame: t("sotogrande[1].timeFrame"),
         paymentLink: "https://pay.panotmobility.com/b/bIY8yQ5uC7ezaIw6oQ",
+        stripeId: "price_1NukDdI5XtUC28eObaCH474y",
       },
       {
         id: 3,
         name: t("sotogrande[2].name"),
         timeFrame: t("sotogrande[2].timeFrame"),
         paymentLink: "https://pay.panotmobility.com/b/bIY16o0aifL517WaF5",
+        stripeId: "price_1NukDdI5XtUC28eObaCH474y",
       },
       {
         id: 4,
         name: t("sotogrande[3].name"),
         timeFrame: t("sotogrande[3].timeFrame"),
         paymentLink: "https://pay.panotmobility.com/b/dR67uM6yGeH1aIwdRg",
+        stripeId: "price_1NukHgI5XtUC28eOpnnMkxuS",
       },
     ],
     Fuerteventura: [
@@ -158,60 +155,57 @@ let formSteps = reactive({
         name: t("fuerteventura[0].name"),
         timeFrame: t("fuerteventura[0].timeFrame"),
         paymentLink: "https://pay.panotmobility.com/b/28o9CU8GO0Qb17W6oK",
+        stripeId: "prod_OCswC7kdEhvFDM",
       },
       {
         id: 2,
         name: t("fuerteventura[1].name"),
         timeFrame: t("fuerteventura[1].timeFrame"),
         paymentLink: "https://pay.panotmobility.com/b/8wM3ew0aicyTeYMcN9",
+        stripeId: "prod_OCswC7kdEhvFDM",
       },
       {
         id: 3,
         name: t("fuerteventura[2].name"),
         timeFrame: t("fuerteventura[2].timeFrame"),
         paymentLink: "https://pay.panotmobility.com/b/eVa6qI0ai0QbdUI5kI",
+        stripeId: "prod_OCswC7kdEhvFDM",
       },
       {
         id: 4,
         name: t("fuerteventura[3].name"),
         timeFrame: t("fuerteventura[3].timeFrame"),
         paymentLink: "https://pay.panotmobility.com/b/aEUdTa8GOdCX4k87sR",
+        stripeId: "prod_OCswC7kdEhvFDM",
       },
     ],
   },
-  fullName: "",
+  fullName: "Diego Zito",
   address: {
-    address: "",
-    city: "",
-    state: "",
-    country: "",
-    postalCode: "",
+    address: "2723 Center Court Dr",
+    city: "Weston",
+    state: "FL",
+    country: "USA",
+    postalCode: "08013",
   },
-  passportNumber: "",
-  email: "",
+  passportNumber: "Y4795940V",
+  email: "diegozito.m@gmail.com",
   signature: null,
-  phoneContact: "",
+  phoneContact: "+34699885435",
 });
 
-const testPayment = () => {
-  const selectedCity = formSteps.selectedCity;
-  const selectedBikeId = formSteps.selectedBike.id;
-  console.log(selectedBikeId);
-
-  // Check if a bike is selected
-  if (selectedBikeId) {
-    // Find the corresponding payment link based on the selected city and bike ID
-    const bikeOptions = formSteps.bikeOptions[selectedCity];
-    console.log(bikeOptions);
-    const bike = bikeOptions.find((option) => option.id === selectedBikeId);
-    console.log(bike);
-
-    // Check if a matching bike is found
-    if (bike) {
-      // Open the payment link in a new tab or window
-      window.open(bike.paymentLink, "_blank");
-    }
-  }
+const handleCheckoutTwo = async () => {
+  const res = await $fetch("/api/cart", {
+    method: "POST",
+    body: {
+      products: {
+        default_price: formSteps.selectedBike.stripeId,
+        quantity: 1,
+      },
+    },
+  });
+  window.location = res.url;
+  console.log(res);
 };
 
 const nextStep = () => {
@@ -304,107 +298,6 @@ const submitForm = async (signature) => {
     }.pdf`
   );
 };
-
-// TESTING STRIPE
-let stripe = null;
-let elements = null;
-let card = null;
-let clientSecret = ref(null);
-let isProcessing = ref(false);
-let currentAddress = ref("sksskks"); // This will be populated from formSteps.address
-
-const stripeInit = async () => {
-  const runtimeConfig = useRuntimeConfig().public;
-  stripe = new Stripe(runtimeConfig.stripePk);
-
-  let res = await fetch("server/api/paymentintent", {
-    method: "POST",
-    body: JSON.stringify({
-      amount: 1000, // Replace with your actual amount
-    }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const data = await res.json();
-  clientSecret.value = data.client_secret;
-
-  elements = stripe.elements();
-  var style = {
-    base: {
-      fontSize: "18px",
-    },
-    invalid: {
-      fontFamily: "Arial, sans-serif",
-      color: "#EE4B2B",
-      iconColor: "#EE4B2B",
-    },
-  };
-  card = elements.create("card", {
-    hidePostalCode: true,
-    style: style,
-  });
-
-  card.mount("#card-element");
-  card.on("change", function (event) {
-    document.querySelector("button").disabled = event.empty;
-    document.querySelector("#card-error").textContent = event.error
-      ? event.error.message
-      : "";
-  });
-};
-
-const pay = async () => {
-  if (!currentAddress.value) {
-    showError("Please add shipping address");
-    return;
-  }
-  isProcessing.value = true;
-
-  let result = await stripe.confirmCardPayment(clientSecret.value, {
-    payment_method: { card: card },
-  });
-
-  if (result.error) {
-    showError(result.error.message);
-    isProcessing.value = false;
-  } else {
-    await createOrder(result.paymentIntent.id);
-    // You can reset the form or navigate the user to a success page here
-  }
-};
-
-const createOrder = async (stripeId) => {
-  await fetch("http://localhost:3000/", {
-    method: "POST",
-    body: JSON.stringify({
-      // Populate with your actual data
-      userId: "USER_ID",
-      stripeId: stripeId,
-      name: "Diego Zito",
-      address: "C/ mallorca 373",
-      zipcode: "080013",
-      city: "Barcelona",
-      country: "Spain",
-      // Add other necessary details
-    }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-};
-
-const showError = (errorMsgText) => {
-  let errorMsg = document.querySelector("#card-error");
-  errorMsg.textContent = errorMsgText;
-  setTimeout(() => {
-    errorMsg.textContent = "";
-  }, 4000);
-};
-
-onMounted(() => {
-  stripeInit();
-});
 </script>
 
 <style scoped>

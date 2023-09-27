@@ -83,12 +83,19 @@
           {{ $t("comp-summary.statementSeven") }}
         </p>
       </div>
-      <button
+      <!-- <button
         v-show="!signatureDisplay"
         @click="signatureDisplay = !signatureDisplay"
         class="w-full bg-black text-white rounded-md px-4 py-2 hover:border hover:text-black hover:bg-transparent my-4"
       >
         {{ $t("comp-summary.sign") }}
+      </button> -->
+      <button
+        class="bg-black text-white rounded-md px-4 py-2 hover:text-black hover:bg-transparent mb-8"
+        @click="pay"
+        :disabled="buttonHide"
+      >
+        {{ $t("comp-summary.pay") }}
       </button>
     </div>
     <div>

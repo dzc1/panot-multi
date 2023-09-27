@@ -8,6 +8,9 @@
     <!-- Step 2 -->
     <template v-else-if="formSteps.step === 2">
       <div class="form-step fade-in">
+        <button :disabled="isProcessing" @click="redirectToStripeCheckout">
+          Pay with Stripe
+        </button>
         <Location @emitChildCity="selectCity" @emitChildClose="emitCloseUp" />
       </div>
     </template>
@@ -102,14 +105,14 @@ import { useRuntimeConfig } from "nuxt/app";
 import { ref, reactive } from "vue";
 import { exportToPDF } from "#imports";
 import { jsPDF } from "jspdf";
-import Location from "./Form/Location.vue";
-import Days from "./Form/Days.vue";
-import Name from "./Form/Name.vue";
-import Address from "./Form/Address.vue";
-import Passport from "./Form/Passport.vue";
-import Phone from "./Form/Phone.vue";
-import Email from "./Form/Email.vue";
-import Summary from "./Form/Summary.vue";
+import Location from "../components/Form/Location.vue";
+import Days from "../components/Form/Days.vue";
+import Name from "../components/Form/Name.vue";
+import Address from "../components/Form/Address.vue";
+import Passport from "../components/Form/Passport.vue";
+import Phone from "../components/Form/Phone.vue";
+import Email from "../components/Form/Email.vue";
+import Summary from "../components/Form/Summary.vue";
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n(); // use as global scope
@@ -299,6 +302,50 @@ const submitForm = async (signature) => {
 };
 
 // TESTING STRIPE
+// let stripe = null;
+// let elements = null;
+// let card = null;
+// let clientSecret = ref(null);
+// let isProcessing = ref(false);
+// let currentAddress = ref("sksskks"); // This will be populated from formSteps.address
+
+// const redirectToStripeCheckout = async () => {
+//   // Replace with your Stripe publishable key
+
+//   const stripe = Stripe(
+//     "pk_live_51KjUxJI5XtUC28eOGE9c0s97ja3dmqueWA4cnM34j4kWpOASBvf8Rtkn37AzsLBpYrAmNrWq4pEz6DGTCjRyuukU003tU2SV7F"
+//   );
+//   console.log(stripe);
+
+//   const session = await fetch("api/create-checkout-session", {
+//     method: "POST",
+//   }).then((res) => res.json());
+//   console.log(session);
+
+//   stripe.redirectToCheckout({ sessionId: session.id });
+// };
+
+// Initialize Stripe
+const stripe = Stripe("YOUR_STRIPE_PUBLIC_KEY"); // Replace with your Stripe public key
+const elements = stripe.elements();
+const card = elements.create("card");
+card.mount("#card-element"); // You'll need to add a div with id "card-element" in your template for Stripe card input
+
+// Handle Stripe payment
+const handleStripePayment = async () => {
+  const result = await stripe.confirmCardPayment(clientSecret.value, {
+    payment_method: { card: card },
+  });
+
+  if (result.error) {
+    // Handle error
+    console.error(result.error.message);
+  } else {
+    // Payment was successful
+    // Display the summary and provide a download PDF option
+    submitForm();
+  }
+};
 </script>
 
 <style scoped>

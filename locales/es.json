@@ -93,5 +93,7 @@
     "clear": "Borrar",
     "download": "Descargar Formulario de Confirmación",
     "pay": "Pagar"
-  }
+  },
+  "h1-success": "Pago efectuado con éxito, gracias por alquilar tu Bicicleta con",
+  "p-success": "Recuerda que si tienes algun problema puedes ponerte en contactoc on nosotros al email hey@panotmobility.com o por telefono llamando a +34 931 033 366"
 }
